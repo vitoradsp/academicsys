@@ -140,4 +140,3 @@ def deletar_usuario(usuario):
 if __name__ == "__main__":
     criar_tabela_usuario()
     inserir_usuario("123","123", "Diretor")
-    inserir_notas_aluno(5,4,3,"Portugues", 1)
