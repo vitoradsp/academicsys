@@ -18,6 +18,7 @@ def logar():
             aluno = banco.buscar_aluno_por_id(verificar_usuario[0])
             notas = banco.buscar_notas(aluno[9])
             tela_alunos.labelnomecar.setText(f"{aluno[1]} {aluno[2]}")
+            tela_alunos.labelcpfcar.setText(f"{aluno[3]}")
             if notas != None:
                 tabela = tela_alunos.tabelaboletim
                 tabela.setRowCount(7)

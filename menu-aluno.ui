@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -379,28 +379,6 @@ background-color: rgb(255, 176, 17)
         <pointsize>12</pointsize>
         <weight>50</weight>
         <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(97, 151, 196);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelmatriculacar">
-      <property name="geometry">
-       <rect>
-        <x>420</x>
-        <y>250</y>
-        <width>161</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Yu Gothic Medium</family>
-        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="styleSheet">
