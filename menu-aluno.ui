@@ -205,46 +205,16 @@ background-color: rgb(255, 176, 17)
 </string>
       </property>
       <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>153</number>
+       <number>128</number>
       </attribute>
       <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
       </attribute>
-      <row>
+      <column>
        <property name="text">
-        <string>Português</string>
+        <string>Materia</string>
        </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>Matemática</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>Geografia</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>Filosofia</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>Historia</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>Biologia</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>Fisica</string>
-       </property>
-      </row>
+      </column>
       <column>
        <property name="text">
         <string>1 Trimestre</string>

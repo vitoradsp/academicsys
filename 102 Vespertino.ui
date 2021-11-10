@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>676</width>
+    <height>561</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Horarios</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(58, 108, 184);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>190</y>
+      <width>561</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(225, 225, 225);
+border-color: rgb(0, 0, 0)
+</string>
+    </property>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <row>
+     <property name="text">
+      <string>13:10</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>13:50</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>14:40</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>15:30</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>15:50</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>16:35</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>17:15</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>Seg</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Ter</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Qua</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Qui</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Sex</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string>Matemática</string>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string>Inglês</string>
+     </property>
+    </item>
+    <item row="0" column="2">
+     <property name="text">
+      <string>Matemática</string>
+     </property>
+    </item>
+    <item row="0" column="3">
+     <property name="text">
+      <string>História</string>
+     </property>
+    </item>
+    <item row="0" column="4">
+     <property name="text">
+      <string>História</string>
+     </property>
+    </item>
+    <item row="1" column="0">
+     <property name="text">
+      <string>Biologia</string>
+     </property>
+    </item>
+    <item row="1" column="1">
+     <property name="text">
+      <string>Geografia</string>
+     </property>
+    </item>
+    <item row="1" column="2">
+     <property name="text">
+      <string>Matemática</string>
+     </property>
+    </item>
+    <item row="1" column="3">
+     <property name="text">
+      <string>História</string>
+     </property>
+    </item>
+    <item row="1" column="4">
+     <property name="text">
+      <string>Física</string>
+     </property>
+    </item>
+    <item row="2" column="0">
+     <property name="text">
+      <string>Biologia</string>
+     </property>
+    </item>
+    <item row="2" column="1">
+     <property name="text">
+      <string>Português</string>
+     </property>
+    </item>
+    <item row="2" column="2">
+     <property name="text">
+      <string>Filosofia</string>
+     </property>
+    </item>
+    <item row="2" column="3">
+     <property name="text">
+      <string>Física</string>
+     </property>
+    </item>
+    <item row="2" column="4">
+     <property name="text">
+      <string>Português</string>
+     </property>
+    </item>
+    <item row="3" column="0">
+     <property name="text">
+      <string>Intervalo</string>
+     </property>
+     <property name="background">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="3" column="1">
+     <property name="text">
+      <string>Intervalo</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="3" column="2">
+     <property name="text">
+      <string>Intervalo</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="3" column="3">
+     <property name="text">
+      <string>Intervalo</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="3" column="4">
+     <property name="text">
+      <string>Intervalo</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="4" column="0">
+     <property name="text">
+      <string>Filosofia</string>
+     </property>
+    </item>
+    <item row="4" column="1">
+     <property name="text">
+      <string>Química</string>
+     </property>
+    </item>
+    <item row="4" column="2">
+     <property name="text">
+      <string>Física</string>
+     </property>
+    </item>
+    <item row="4" column="3">
+     <property name="text">
+      <string>Geografia</string>
+     </property>
+    </item>
+    <item row="4" column="4">
+     <property name="text">
+      <string>Inglês</string>
+     </property>
+    </item>
+    <item row="5" column="0">
+     <property name="text">
+      <string>Filosofia</string>
+     </property>
+    </item>
+    <item row="5" column="1">
+     <property name="text">
+      <string>Português</string>
+     </property>
+    </item>
+    <item row="5" column="2">
+     <property name="text">
+      <string>Inglês</string>
+     </property>
+    </item>
+    <item row="5" column="3">
+     <property name="text">
+      <string>Filosofia</string>
+     </property>
+    </item>
+    <item row="5" column="4">
+     <property name="text">
+      <string>Física</string>
+     </property>
+    </item>
+    <item row="6" column="0">
+     <property name="text">
+      <string>Saída</string>
+     </property>
+     <property name="background">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>85</red>
+        <green>170</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="6" column="1">
+     <property name="text">
+      <string>Saída</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>85</red>
+        <green>170</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="6" column="2">
+     <property name="text">
+      <string>Saída</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>85</red>
+        <green>170</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="6" column="3">
+     <property name="text">
+      <string>Saída</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>85</red>
+        <green>170</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+    <item row="6" column="4">
+     <property name="text">
+      <string>Saída</string>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>85</red>
+        <green>170</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>-80</x>
+      <y>0</y>
+      <width>800</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../Telas Prontas/Sem Título-6.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnvoltar2">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>470</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(203, 154, 4);
+border-radius:10px</string>
+    </property>
+    <property name="text">
+     <string>Voltar</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>166</y>
+      <width>67</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic Medium</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+color: rgb(255, 170, 0);</string>
+    </property>
+    <property name="text">
+     <string>Turma:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>162</y>
+      <width>201</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic Medium</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>102 Vespertino</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

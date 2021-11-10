@@ -17,13 +17,21 @@ def logar():
         elif verificar_usuario[3] == "Aluno":
             aluno = banco.buscar_aluno_por_id(verificar_usuario[0])
             notas = banco.buscar_notas(aluno[9])
-            tabela = tela_alunos.tabelaboletim
             if notas != None:
-                if notas[4] == "Matematica":
-                    tabela.setItem(2, 0, QtWidgets.QTableWidgetItem(f"{notas[1]}"))
+                tabela = tela_alunos.tabelaboletim
+                tabela.setRowCount(7)
+                row = 0
+                for p in notas:
+                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{p[3]}"))
+                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{p[0]}"))
+                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{p[1]}"))
+                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{p[2]}"))
+                    row += 1  
+                    tela_alunos.show()
+                    tela_login.close()
             else:
-                tela_alunos.show()
-                tela_login.close()
+                    tela_alunos.show()
+                    tela_login.close()
         elif verificar_usuario[3] == "Professor":
             #tela_professores.show()
             tela_login.close()

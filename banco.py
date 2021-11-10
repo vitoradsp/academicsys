@@ -21,7 +21,7 @@ def criar_tabela_falta_alunos():
 def criar_tabela_nota_aluno():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS notasaluno(nota1 REAL, nota2 REAL, nota3 REAL, materia TEXT, usuario_id INTEGER NOT NULL, FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
+    cursor.execute('CREATE TABLE IF NOT EXISTS notasaluno(nota1 TEXT, nota2 TEXT, nota3 TEXT, materia TEXT, usuario_id INTEGER , FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
     banco.commit()
     banco.close()
 
@@ -87,11 +87,11 @@ def buscar_usuario(usuario):
     return cursor.fetchone()
 
 def buscar_notas(usuario_id):
-    criar_tabela_usuario()
+    criar_tabela_nota_aluno()
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute(f"SELECT rowid, * FROM notasaluno WHERE usuario_id={usuario_id}")
-    return cursor.fetchone()
+    cursor.execute(f"SELECT * FROM notasaluno WHERE usuario_id LIKE '%{usuario_id}%'")
+    return cursor.fetchall()
 
 def buscar_professor_por_cpf(cpf):
     criar_tabela_professores()
@@ -113,6 +113,13 @@ def buscar_aluno_por_id(usuario_id):
     cursor = banco.cursor()
     cursor.execute(f"SELECT rowid, * FROM alunos WHERE usuario_id={usuario_id}")
     return cursor.fetchone()
+
+def deletar_notas_materia(materia):
+    criar_tabela_alunos()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"DELETE FROM notasaluno WHERE materia='{materia}'")
+    return cursor.fetchall()
 
 def buscar_alunos_mesma_turma(turma):
     criar_tabela_alunos()
@@ -139,4 +146,4 @@ def deletar_usuario(usuario):
 
 if __name__ == "__main__":
     criar_tabela_usuario()
-    inserir_usuario("123","123", "Diretor")
+    inserir_notas_aluno("5","6","7","Portugues",2)

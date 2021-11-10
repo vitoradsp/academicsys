@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>607</width>
+    <height>395</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Informações</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(58, 108, 184);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="labellogosenoc">
+    <property name="geometry">
+     <rect>
+      <x>-110</x>
+      <y>0</y>
+      <width>800</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../Telas Prontas/Sem Título-6.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labeltexto1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>603</width>
+      <height>95</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic Medium</family>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Desde 1946, o Serviço Nacional de Aprendizagem Comercial 
+Senac é o principal agente de educação profissional 
+voltado para o Comércio de Bens, Serviços e Turismo do País.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labeltexto2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>240</y>
+      <width>664</width>
+      <height>87</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic Medium</family>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Hoje, está presente em mais de 1.800 municípios, de Norte  a Sul do Brasil, 
+ onde mantém infraestrutura de ponta composta por mais de 
+ 600 unidades escolares empresas pedagógicas e unidades móveis.</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnvoltar">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>350</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 172, 76);
+border-radius:10px
+</string>
+    </property>
+    <property name="text">
+     <string>Voltar</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
