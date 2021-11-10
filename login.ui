@@ -105,23 +105,6 @@ border-radius:10px</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_esquecisenha">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>510</y>
-      <width>121</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(75, 114, 255);
-border-radius:10px</string>
-    </property>
-    <property name="text">
-     <string>Esqueceu a senha?</string>
-    </property>
-   </widget>
   </widget>
  </widget>
  <resources/>

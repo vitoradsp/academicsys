@@ -33,7 +33,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab1">
      <attribute name="title">
@@ -282,7 +282,7 @@ border-radius:10px</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../../../.designer/backup/Sem Título-6.png</pixmap>
+       <pixmap>Sem Título-6.png</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="labelturno_3">
@@ -501,7 +501,7 @@ border-radius:10px
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../../../.designer/backup/Sem Título-6.png</pixmap>
+       <pixmap>Sem Título-6.png</pixmap>
       </property>
      </widget>
      <widget class="QLineEdit" name="inputcsenhaprofessor">

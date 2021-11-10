@@ -17,6 +17,7 @@ def logar():
         elif verificar_usuario[3] == "Aluno":
             aluno = banco.buscar_aluno_por_id(verificar_usuario[0])
             notas = banco.buscar_notas(aluno[9])
+            tela_alunos.labelnomecar.setText(f"{aluno[1]} {aluno[2]}")
             if notas != None:
                 tabela = tela_alunos.tabelaboletim
                 tabela.setRowCount(7)
@@ -118,14 +119,26 @@ def mostrar_alunos_minha_turma():
         tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{pu[8]}"))
         row += 1  
 
+def visualizar_dados_escolares():
+    usuario = tela_login.inputnome.text()
+    verificar_usuario = banco.buscar_usuario(usuario)
+    aluno = banco.buscar_aluno_por_id(verificar_usuario[0])
+    if aluno[6] == "101":
+        tela_dados_escolares_matutino.show()
+    elif aluno[6] == "102":
+        tela_dados_escolares_vespertino.show()
+    elif aluno[6] == "103":
+        tela_dados_escolares_noturno.show()
 
+def fechar_tela_dados_escolares_matutino():
+    tela_dados_escolares_matutino.close()
 
+def logout():
+    tela_alunos.close()
+    tela_login.show()
 
-
-
-
-
-
+def mostrar_tela_informacoes():
+    tela_informacoes.show()
 
 
 
@@ -141,11 +154,24 @@ if __name__ == "__main__":
     tela_registro = uic.loadUi('cadastro-aluno-professores.ui')
     tela_alunos = uic.loadUi('menu-aluno.ui')
     tela_minha_turma = uic.loadUi('minha-turma.ui')
-    
+    tela_dados_escolares_matutino = uic.loadUi('101 Matutino.ui')
+    tela_dados_escolares_vespertino = uic.loadUi('102 Vespertino.ui')
+    tela_dados_escolares_noturno = uic.loadUi('103 Noturno.ui')
+    tela_informacoes = uic.loadUi('informacoes.ui')
+
     #Botoes
     tela_login.btn_login.clicked.connect(logar)
+    
     tela_registro.cadastrarprofessor.clicked.connect(registrar_professor)
     tela_registro.cadastraraluno.clicked.connect(registrar_aluno)
+    
+    tela_alunos.btndadosescolares.clicked.connect(visualizar_dados_escolares)
     tela_alunos.btnminhaturma.clicked.connect(mostrar_alunos_minha_turma)
+    tela_alunos.btnlogout.clicked.connect(logout)
+    tela_alunos.btninformacoes.clicked.connect(mostrar_tela_informacoes)
+    
+    tela_dados_escolares_matutino.btnvoltar1.clicked.connect(fechar_tela_dados_escolares_matutino)
+    
+        
     tela_login.show()
     qt.exec_()
