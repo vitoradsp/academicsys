@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Logue-se</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(75, 114, 255);</string>

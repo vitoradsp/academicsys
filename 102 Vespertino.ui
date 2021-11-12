@@ -395,7 +395,7 @@ border-color: rgb(0, 0, 0)
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../Telas Prontas/Sem Título-6.png</pixmap>
+     <pixmap>Sem Título-6.png</pixmap>
     </property>
    </widget>
    <widget class="QPushButton" name="btnvoltar2">
@@ -419,7 +419,7 @@ border-radius:10px</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>166</y>
+      <y>158</y>
       <width>67</width>
       <height>21</height>
      </rect>
@@ -442,7 +442,7 @@ color: rgb(255, 170, 0);</string>
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>162</y>
+      <y>155</y>
       <width>201</width>
       <height>27</height>
      </rect>

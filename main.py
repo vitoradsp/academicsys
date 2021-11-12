@@ -1,6 +1,15 @@
 import sys, banco
 from PyQt5 import uic, QtWidgets
 
+#########################################################################################################################
+#                                              Sistema Academico                                                        #
+#         Diretor - Gerencia registramento de professores e dos horarios escolares                                      #
+#         Professor - Adiciona Notas e gerencia falta(s) do aluno.                                                      #
+#         Aluno - Checa suas notas e faltas de certas materias, assim como seu resultado final (Aprovado, Reprovado).   #
+#                                                                                                                       #
+#                                                                                                                       #
+#########################################################################################################################
+
 def logar():
     usuario = tela_login.inputnome.text()
     senha = tela_login.inputsenha.text()
@@ -19,6 +28,7 @@ def logar():
             notas = banco.buscar_notas(aluno[9])
             tela_alunos.labelnomecar.setText(f"{aluno[1]} {aluno[2]}")
             tela_alunos.labelcpfcar.setText(f"{aluno[3]}")
+            #Adicionar notas do aluno na tabela.
             if notas != None:
                 tabela = tela_alunos.tabelaboletim
                 tabela.setRowCount(7)
@@ -49,6 +59,7 @@ def registrar_professor():
     csenha = tela_registro.inputcsenhaprofessor.text()
     usuario = tela_registro.inputusuarioprofessor.text()
     turma = []
+    #Turmas do professor, professor pode dar aula para mais de uma turma.
     if tela_registro.t101.isChecked() == True:
         turma.append("101")
     if tela_registro.t102.isChecked() == True:
@@ -134,6 +145,12 @@ def visualizar_dados_escolares():
 def fechar_tela_dados_escolares_matutino():
     tela_dados_escolares_matutino.close()
 
+def fechar_tela_dados_escolares_vespertino():
+    tela_dados_escolares_vespertino.close()
+
+def fechar_tela_dados_escolares_noturno():
+    tela_dados_escolares_noturno.close()
+
 def logout():
     tela_alunos.close()
     tela_login.show()
@@ -172,6 +189,8 @@ if __name__ == "__main__":
     tela_alunos.btninformacoes.clicked.connect(mostrar_tela_informacoes)
     
     tela_dados_escolares_matutino.btnvoltar1.clicked.connect(fechar_tela_dados_escolares_matutino)
+    tela_dados_escolares_vespertino.btnvoltar2.clicked.connect(fechar_tela_dados_escolares_vespertino)
+    tela_dados_escolares_noturno.btnvoltar3.clicked.connect(fechar_tela_dados_escolares_noturno)
     
         
     tela_login.show()

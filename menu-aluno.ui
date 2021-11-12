@@ -26,8 +26,17 @@
       <height>611</height>
      </rect>
     </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
+    </property>
+    <property name="usesScrollButtons">
+     <bool>true</bool>
+    </property>
+    <property name="documentMode">
+     <bool>true</bool>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -302,7 +311,7 @@ background-color: rgb(255, 176, 17)
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
-      <string>Carteirinha</string>
+      <string>Informacoes do Aluno</string>
      </attribute>
      <widget class="QLabel" name="titulosuaturma_2">
       <property name="geometry">
@@ -354,7 +363,7 @@ background-color: rgb(255, 176, 17)
       <property name="font">
        <font>
         <family>Yu Gothic Medium</family>
-        <pointsize>12</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -368,7 +377,7 @@ background-color: rgb(255, 176, 17)
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>190</y>
+        <y>188</y>
         <width>201</width>
         <height>19</height>
        </rect>
@@ -376,7 +385,7 @@ background-color: rgb(255, 176, 17)
       <property name="font">
        <font>
         <family>Yu Gothic Medium</family>
-        <pointsize>12</pointsize>
+        <pointsize>18</pointsize>
         <weight>50</weight>
         <bold>false</bold>
        </font>

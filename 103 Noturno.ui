@@ -398,7 +398,7 @@ border-color: rgb(0, 0, 0)
      <pixmap>../Telas Prontas/Sem Título-6.png</pixmap>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnvoltar2">
+   <widget class="QPushButton" name="btnvoltar3">
     <property name="geometry">
      <rect>
       <x>290</x>
