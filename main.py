@@ -68,8 +68,12 @@ def registrar_professor():
         turma.append("103")
     if nome == "" or sobrenome == '' or cpf == '' or endereco == '' or complemento == '' or senha == '' or csenha == '' or usuario == '' or turma == [] or materia == "":
         tela_registro.aviso.setText("Campo(s) em branco.")
+    elif nome == "Nome" or sobrenome == 'Sobrenome' or cpf == '' or endereco == 'Endereço' or complemento == 'Complemento' or senha == 'Senha' or csenha == 'Senha' or usuario == 'Usuario' or turma == [] or materia == "":
+        tela_registro.aviso.setText("Campo(s) em branco.")
     elif csenha != senha:
         tela_registro.aviso.setText("Senhas nao correspondem.")
+    elif len(senha) < 6:
+        tela_registro.aviso.setText("Senha ")
     else:
         verificar_user = banco.buscar_professor_por_cpf(cpf)
         verificar_existencia_usuario = banco.buscar_usuario(usuario)

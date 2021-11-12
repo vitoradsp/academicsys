@@ -100,77 +100,77 @@ border-color: rgb(0, 0, 0)
     </column>
     <item row="0" column="0">
      <property name="text">
-      <string>Matemática</string>
+      <string/>
      </property>
     </item>
     <item row="0" column="1">
      <property name="text">
-      <string>Inglês</string>
+      <string/>
      </property>
     </item>
     <item row="0" column="2">
      <property name="text">
-      <string>Matemática</string>
+      <string/>
      </property>
     </item>
     <item row="0" column="3">
      <property name="text">
-      <string>História</string>
+      <string/>
      </property>
     </item>
     <item row="0" column="4">
      <property name="text">
-      <string>Filosofia</string>
+      <string/>
      </property>
     </item>
     <item row="1" column="0">
      <property name="text">
-      <string>Biologia</string>
+      <string/>
      </property>
     </item>
     <item row="1" column="1">
      <property name="text">
-      <string>Geografia</string>
+      <string/>
      </property>
     </item>
     <item row="1" column="2">
      <property name="text">
-      <string>História</string>
+      <string/>
      </property>
     </item>
     <item row="1" column="3">
      <property name="text">
-      <string>Matemática</string>
+      <string/>
      </property>
     </item>
     <item row="1" column="4">
      <property name="text">
-      <string>Física</string>
+      <string/>
      </property>
     </item>
     <item row="2" column="0">
      <property name="text">
-      <string>Física</string>
+      <string/>
      </property>
     </item>
     <item row="2" column="1">
      <property name="text">
-      <string>Inglês</string>
+      <string/>
      </property>
     </item>
     <item row="2" column="2">
      <property name="text">
-      <string>Filosofia</string>
+      <string/>
      </property>
     </item>
     <item row="2" column="3">
      <property name="text">
-      <string>Física</string>
+      <string/>
      </property>
     </item>
     <item row="2" column="4">
      <property name="text">
-      <string>Português</string>
+      <string/>
      </property>
     </item>
     <item row="3" column="0">
@@ -254,52 +254,52 @@ border-color: rgb(0, 0, 0)
     </item>
     <item row="4" column="0">
      <property name="text">
-      <string>Filosofia</string>
+      <string/>
      </property>
     </item>
     <item row="4" column="1">
      <property name="text">
-      <string>História</string>
+      <string/>
      </property>
     </item>
     <item row="4" column="2">
      <property name="text">
-      <string>Filosofia</string>
+      <string/>
      </property>
     </item>
     <item row="4" column="3">
      <property name="text">
-      <string>Geografia</string>
+      <string/>
      </property>
     </item>
     <item row="4" column="4">
      <property name="text">
-      <string>Inglês</string>
+      <string/>
      </property>
     </item>
     <item row="5" column="0">
      <property name="text">
-      <string>Química</string>
+      <string/>
      </property>
     </item>
     <item row="5" column="1">
      <property name="text">
-      <string>Português</string>
+      <string/>
      </property>
     </item>
     <item row="5" column="2">
      <property name="text">
-      <string>Português</string>
+      <string/>
      </property>
     </item>
     <item row="5" column="3">
      <property name="text">
-      <string>Física</string>
+      <string/>
      </property>
     </item>
     <item row="5" column="4">
      <property name="text">
-      <string>Biologia</string>
+      <string/>
      </property>
     </item>
     <item row="6" column="0">
@@ -395,7 +395,7 @@ border-color: rgb(0, 0, 0)
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../Telas Prontas/Sem Título-6.png</pixmap>
+     <pixmap>Sem Título-6.png</pixmap>
     </property>
    </widget>
    <widget class="QPushButton" name="btnvoltar3">
