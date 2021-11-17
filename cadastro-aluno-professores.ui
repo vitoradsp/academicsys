@@ -33,7 +33,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab1">
      <attribute name="title">
@@ -76,10 +76,10 @@ background-color: rgb(255, 255, 255);
 border-radius:10px</string>
       </property>
       <property name="text">
-       <string>Confirmar Senha</string>
+       <string>Senha</string>
       </property>
       <property name="echoMode">
-       <enum>QLineEdit::Normal</enum>
+       <enum>QLineEdit::Password</enum>
       </property>
      </widget>
      <widget class="QLineEdit" name="inputsenhaaluno">
@@ -101,7 +101,7 @@ border-radius:10px</string>
        <string>Senha</string>
       </property>
       <property name="echoMode">
-       <enum>QLineEdit::Normal</enum>
+       <enum>QLineEdit::Password</enum>
       </property>
      </widget>
      <widget class="QLabel" name="labelturno">
@@ -152,7 +152,7 @@ border-radius:10px</string>
      <widget class="QComboBox" name="turmabox">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>120</x>
         <y>404</y>
         <width>181</width>
         <height>31</height>
@@ -310,7 +310,7 @@ border-radius:10px</string>
      <widget class="QComboBox" name="cursobox">
       <property name="geometry">
        <rect>
-        <x>404</x>
+        <x>391</x>
         <y>405</y>
         <width>181</width>
         <height>31</height>

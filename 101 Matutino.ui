@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(58, 108, 184);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="horarios">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -31,9 +31,6 @@
 background-color: rgb(225, 225, 225);
 border-color: rgb(0, 0, 0)
 </string>
-    </property>
-    <property name="alternatingRowColors">
-     <bool>true</bool>
     </property>
     <attribute name="horizontalHeaderCascadingSectionResizes">
      <bool>false</bool>
@@ -103,77 +100,77 @@ border-color: rgb(0, 0, 0)
     </column>
     <item row="0" column="0">
      <property name="text">
-      <string/>
+      <string>Física</string>
      </property>
     </item>
     <item row="0" column="1">
      <property name="text">
-      <string/>
+      <string>Geografia</string>
      </property>
     </item>
     <item row="0" column="2">
      <property name="text">
-      <string/>
+      <string>Matemática</string>
      </property>
     </item>
     <item row="0" column="3">
      <property name="text">
-      <string/>
+      <string>Biologia</string>
      </property>
     </item>
     <item row="0" column="4">
      <property name="text">
-      <string/>
+      <string>Sociologia</string>
      </property>
     </item>
     <item row="1" column="0">
      <property name="text">
-      <string/>
+      <string>Física</string>
      </property>
     </item>
     <item row="1" column="1">
      <property name="text">
-      <string/>
+      <string>Geografia</string>
      </property>
     </item>
     <item row="1" column="2">
      <property name="text">
-      <string/>
+      <string>Artes</string>
      </property>
     </item>
     <item row="1" column="3">
      <property name="text">
-      <string/>
+      <string>Biologia</string>
      </property>
     </item>
     <item row="1" column="4">
      <property name="text">
-      <string/>
+      <string>Português</string>
      </property>
     </item>
     <item row="2" column="0">
      <property name="text">
-      <string/>
+      <string>Biologia</string>
      </property>
     </item>
     <item row="2" column="1">
      <property name="text">
-      <string/>
+      <string>Filosofia</string>
      </property>
     </item>
     <item row="2" column="2">
      <property name="text">
-      <string/>
+      <string>EDF</string>
      </property>
     </item>
     <item row="2" column="3">
      <property name="text">
-      <string/>
+      <string>Matemática</string>
      </property>
     </item>
     <item row="2" column="4">
      <property name="text">
-      <string/>
+      <string>EDF</string>
      </property>
     </item>
     <item row="3" column="0">
@@ -257,52 +254,52 @@ border-color: rgb(0, 0, 0)
     </item>
     <item row="4" column="0">
      <property name="text">
-      <string/>
+      <string>Sociologia</string>
      </property>
     </item>
     <item row="4" column="1">
      <property name="text">
-      <string/>
+      <string>Historia</string>
      </property>
     </item>
     <item row="4" column="2">
      <property name="text">
-      <string/>
+      <string>Inglês</string>
      </property>
     </item>
     <item row="4" column="3">
      <property name="text">
-      <string/>
+      <string>Matemática</string>
      </property>
     </item>
     <item row="4" column="4">
      <property name="text">
-      <string/>
+      <string>Química</string>
      </property>
     </item>
     <item row="5" column="0">
      <property name="text">
-      <string/>
+      <string>Português</string>
      </property>
     </item>
     <item row="5" column="1">
      <property name="text">
-      <string/>
+      <string>Historia</string>
      </property>
     </item>
     <item row="5" column="2">
      <property name="text">
-      <string/>
+      <string>Inglês</string>
      </property>
     </item>
     <item row="5" column="3">
      <property name="text">
-      <string/>
+      <string>Filosofia</string>
      </property>
     </item>
     <item row="5" column="4">
      <property name="text">
-      <string/>
+      <string>Química</string>
      </property>
     </item>
     <item row="6" column="0">
@@ -398,7 +395,7 @@ border-color: rgb(0, 0, 0)
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>Sem Título-6.png</pixmap>
+     <pixmap>../Telas Prontas/Sem Título-6.png</pixmap>
     </property>
    </widget>
    <widget class="QPushButton" name="btnvoltar1">
