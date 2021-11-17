@@ -46,7 +46,7 @@ def logar():
                     tela_alunos.show()
                     tela_login.close()
         elif verificar_usuario[3] == "Professor":
-            #tela_professores.show()
+            tela_professores.show()
             tela_login.close()
 
 def registrar_professor():
@@ -179,6 +179,7 @@ if __name__ == "__main__":
     tela_registro = uic.loadUi('cadastro-aluno-professores.ui')
     tela_alunos = uic.loadUi('menu-aluno.ui')
     tela_minha_turma = uic.loadUi('minha-turma.ui')
+    tela_professor = uic.loadUi('menu-professor')
     tela_dados_escolares_matutino = uic.loadUi('101 Matutino.ui')
     tela_dados_escolares_vespertino = uic.loadUi('102 Vespertino.ui')
     tela_dados_escolares_noturno = uic.loadUi('103 Noturno.ui')
