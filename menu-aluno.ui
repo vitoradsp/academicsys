@@ -176,7 +176,7 @@ background-color: rgb(255, 176, 17)
 </string>
       </property>
       <property name="text">
-       <string>Informações</string>
+       <string>Info. Escola</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">
@@ -351,52 +351,6 @@ background-color: rgb(255, 176, 17)
        <pixmap>carteira estudante.png</pixmap>
       </property>
      </widget>
-     <widget class="QLabel" name="labelnomecar">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>130</y>
-        <width>231</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Yu Gothic Medium</family>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(97, 151, 196);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelcpfcar">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>188</y>
-        <width>201</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Yu Gothic Medium</family>
-        <pointsize>18</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(97, 151, 196);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
      <widget class="QLabel" name="labelturmacar">
       <property name="geometry">
        <rect>
@@ -414,6 +368,114 @@ background-color: rgb(255, 176, 17)
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>110</y>
+        <width>81</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(6197c4);</string>
+      </property>
+      <property name="text">
+       <string>ALUNO: </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>160</y>
+        <width>81</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(6197c4);</string>
+      </property>
+      <property name="text">
+       <string>CPF:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>319</y>
+        <width>351</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(6197c4);</string>
+      </property>
+      <property name="text">
+       <string>Direito a apenas uma carteirinha, caso perca por favor contate a direcao.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelaluno">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>110</y>
+        <width>191</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(6197c4);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelcpf">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>160</y>
+        <width>231</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(6197c4);</string>
       </property>
       <property name="text">
        <string/>

@@ -26,8 +26,9 @@ def logar():
         elif verificar_usuario[3] == "Aluno":
             aluno = banco.buscar_aluno_por_id(verificar_usuario[0])
             notas = banco.buscar_notas(aluno[9])
-            tela_alunos.labelnomecar.setText(f"{aluno[1]} {aluno[2]}")
-            tela_alunos.labelcpfcar.setText(f"{aluno[3]}")
+            tela_alunos.labelaluno.setText(f"{aluno[1]} {aluno[2]}")
+            tela_alunos.labelcpf.setText(f"{aluno[3]}")
+            tela_alunos.labelturmacar.setText(f"{aluno[6]}")
             #Adicionar notas do aluno na tabela.
             if notas != None:
                 tabela = tela_alunos.tabelaboletim
@@ -162,7 +163,9 @@ def logout():
 def mostrar_tela_informacoes():
     tela_informacoes.show()
 
-
+def voltar_tela_informacoes():
+    tela_informacoes.close()
+    tela_alunos.show()
 
 
 
@@ -192,6 +195,8 @@ if __name__ == "__main__":
     tela_alunos.btnlogout.clicked.connect(logout)
     tela_alunos.btninformacoes.clicked.connect(mostrar_tela_informacoes)
     
+    tela_informacoes.btnvoltar.clicked.connect(voltar_tela_informacoes)
+
     tela_dados_escolares_matutino.btnvoltar1.clicked.connect(fechar_tela_dados_escolares_matutino)
     tela_dados_escolares_vespertino.btnvoltar2.clicked.connect(fechar_tela_dados_escolares_vespertino)
     tela_dados_escolares_noturno.btnvoltar3.clicked.connect(fechar_tela_dados_escolares_noturno)
