@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Aluno</string>
+   <string>Professores</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(58, 108, 184);</string>
@@ -20,7 +20,7 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>-1</x>
+      <x>0</x>
       <y>0</y>
       <width>771</width>
       <height>611</height>
@@ -100,7 +100,7 @@ background-color: rgb(255, 2, 69);
        <string>Logout</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btndadosescolares">
+     <widget class="QPushButton" name="fazerchamada">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -121,7 +121,7 @@ background-color: rgb(255, 176, 17)
 </string>
       </property>
       <property name="text">
-       <string>Dados Escolares</string>
+       <string>Realizar Chamada</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btninformacoes">
@@ -161,7 +161,7 @@ background-color: rgb(255, 176, 17)
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../Telas Prontas/blackboardprof.png</pixmap>
+       <pixmap>blackboardprof.png</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="labelnomebemvindo">
@@ -203,6 +203,19 @@ background-color: rgb(255, 176, 17)
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>304</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Nome</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Turma</string>
+       </property>
+      </column>
      </widget>
      <widget class="QPushButton" name="btnbuscaraluno">
       <property name="geometry">
@@ -243,6 +256,9 @@ border-radius:10px</string>
       <property name="text">
        <string/>
       </property>
+      <property name="placeholderText">
+       <string>Nome Completo do Aluno</string>
+      </property>
      </widget>
      <widget class="QLabel" name="labelnota">
       <property name="geometry">
@@ -265,7 +281,7 @@ border-radius:10px</string>
        <string>Nota:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="inputaddnota">
+     <widget class="QLineEdit" name="inputanota">
       <property name="geometry">
        <rect>
         <x>360</x>
@@ -356,6 +372,26 @@ border-radius: 10px
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
+      <item>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>101</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>102</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>103</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLabel" name="labelturmasprof">
       <property name="geometry">

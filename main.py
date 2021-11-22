@@ -45,7 +45,7 @@ def logar():
             else:
                     tela_alunos.show()
                     tela_login.close()
-        elif verificar_usuario[3] == "Professor":
+        elif verificar_usuario[3] != "Aluno" and verificar_usuario[3] != "Diretor":
             tela_professores.show()
             tela_login.close()
 
@@ -74,7 +74,7 @@ def registrar_professor():
     elif csenha != senha:
         tela_registro.aviso.setText("Senhas nao correspondem.")
     elif len(senha) < 6:
-        tela_registro.aviso.setText("Senha ")
+        tela_registro.aviso.setText("Senha necessita no minimo 6 caracteres.")
     else:
         verificar_user = banco.buscar_professor_por_cpf(cpf)
         verificar_existencia_usuario = banco.buscar_usuario(usuario)
@@ -85,12 +85,11 @@ def registrar_professor():
         else:
             tela_registro.aviso.setText("")
             banco.inserir_professor(nome,sobrenome,cpf,endereco,complemento,turma)        
-            banco.inserir_usuario(usuario, senha, "Professor")
+            banco.inserir_usuario(usuario, senha, materia)
             tela_registro.aviso.setText("Sucesso no registro.")
 
 def registrar_aluno():
     nome = tela_registro.inputnomealuno.text()
-    sobrenome = tela_registro.inputsobrenomealuno.text()
     cpf = tela_registro.inputcpfaluno.text()
     endereco = tela_registro.inputenderecoaluno.text()
     complemento = tela_registro.inputcomplementoaluno.text()
@@ -100,9 +99,9 @@ def registrar_aluno():
     turma = tela_registro.turmabox.currentText()
     curso = tela_registro.cursobox.currentText()
     data_de_nascimento = tela_registro.inputdatadenascimentoaluno.text()
-    if nome == "" or sobrenome == '' or cpf == '' or endereco == '' or complemento == '' or senha == '' or csenha == '' or usuario == '' or turma == '' or curso == '' or data_de_nascimento == "//":
+    if nome == "" or cpf == '' or endereco == '' or complemento == '' or senha == '' or csenha == '' or usuario == '' or turma == '' or curso == '' or data_de_nascimento == "//":
         tela_registro.erro.setText("Campo(s) em branco.")
-    if nome == "Nome" or sobrenome == 'Sobrenome' or cpf == '' or endereco == 'Endereço' or complemento == 'Complemento' or senha == 'Senha' or csenha == 'Confirmar Senha' or usuario == 'Usuario' or turma == '' or curso == '' or data_de_nascimento == "//":
+    if nome == "Nome" or cpf == '' or endereco == 'Endereço' or complemento == 'Complemento' or senha == 'Senha' or csenha == 'Confirmar Senha' or usuario == 'Usuario' or turma == '' or curso == '' or data_de_nascimento == "//":
         tela_registro.erro.setText("Campo(s) invalido(s)!")
     elif csenha != senha:
         tela_registro.erro.setText("Senhas Nao coincidem!")
@@ -117,7 +116,7 @@ def registrar_aluno():
             tela_registro.erro.setText("")
             banco.inserir_usuario(usuario,senha, "Aluno")
             verificar_usuario = banco.buscar_usuario(usuario)
-            banco.inserir_aluno(nome, sobrenome, cpf, endereco, complemento, curso, data_de_nascimento, turma, verificar_usuario[0])            
+            banco.inserir_aluno(nome, cpf, endereco, complemento, curso, data_de_nascimento, turma, verificar_usuario[0])            
             tela_registro.erro.setText("Sucesso no registro.")
 
 def mostrar_alunos_minha_turma():
@@ -167,8 +166,13 @@ def voltar_tela_informacoes():
     tela_informacoes.close()
     tela_alunos.show()
 
-
-
+def buscar_aluno_tela_professor():
+    user = tela_login.inputnome.text()
+    nome = tela_professores.inputbuscaraluno.text()
+    tabela = tela_professores.tablealunosprof
+    info_professor = banco.buscar_usuario(user)
+    notasgeral = banco.buscar_notas_materia(info_professor[3],)
+    usuarioid_aluno = banco.buscar_usuarioid_por_nome(nome)
 
 
 
@@ -179,11 +183,13 @@ if __name__ == "__main__":
     tela_registro = uic.loadUi('cadastro-aluno-professores.ui')
     tela_alunos = uic.loadUi('menu-aluno.ui')
     tela_minha_turma = uic.loadUi('minha-turma.ui')
-    tela_professor = uic.loadUi('menu-professor')
+    tela_professores = uic.loadUi('menu-professor.ui')
     tela_dados_escolares_matutino = uic.loadUi('101 Matutino.ui')
     tela_dados_escolares_vespertino = uic.loadUi('102 Vespertino.ui')
     tela_dados_escolares_noturno = uic.loadUi('103 Noturno.ui')
     tela_informacoes = uic.loadUi('informacoes.ui')
+
+
 
     #Botoes
     tela_login.btn_login.clicked.connect(logar)
@@ -196,6 +202,8 @@ if __name__ == "__main__":
     tela_alunos.btnlogout.clicked.connect(logout)
     tela_alunos.btninformacoes.clicked.connect(mostrar_tela_informacoes)
     
+    tela_professores.btnbuscaraluno.clicked.connect(buscar_aluno_tela_professor)
+
     tela_informacoes.btnvoltar.clicked.connect(voltar_tela_informacoes)
 
     tela_dados_escolares_matutino.btnvoltar1.clicked.connect(fechar_tela_dados_escolares_matutino)

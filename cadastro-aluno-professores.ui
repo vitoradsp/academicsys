@@ -546,6 +546,7 @@ border-radius:10px</string>
         <underline>false</underline>
         <strikeout>false</strikeout>
         <stylestrategy>PreferDefault</stylestrategy>
+        <kerning>true</kerning>
        </font>
       </property>
       <property name="styleSheet">
@@ -554,10 +555,13 @@ background-color: rgb(255, 255, 255);
 border-radius:10px</string>
       </property>
       <property name="text">
-       <string>Nome</string>
+       <string/>
       </property>
       <property name="echoMode">
        <enum>QLineEdit::Normal</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Nome Completo</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="inputcomplementoprofessor">
