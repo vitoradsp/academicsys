@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>750</width>
-    <height>543</height>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Professores</string>
+   <string>Aluno</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(58, 108, 184);</string>
@@ -20,14 +20,17 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-1</x>
       <y>0</y>
       <width>771</width>
       <height>611</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(218, 218, 218);</string>
+    </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -37,9 +40,9 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>20</y>
-        <width>211</width>
-        <height>71</height>
+        <y>10</y>
+        <width>209</width>
+        <height>48</height>
        </rect>
       </property>
       <property name="font">
@@ -49,17 +52,18 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 176, 17)</string>
+       <string notr="true">background-color: rgb(58, 108, 184);
+color: rgb(255, 176, 17)</string>
       </property>
       <property name="text">
-       <string>Bem Vindo! </string>
+       <string>Bem Vindo</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnminhaturmaprof">
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>170</y>
+        <y>140</y>
         <width>121</width>
         <height>41</height>
        </rect>
@@ -71,7 +75,7 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">
+       <string notr="true">border: 1px solid black;
 border-radius: 10px;
 background-color: rgb(255, 176, 17)
 </string>
@@ -83,14 +87,15 @@ background-color: rgb(255, 176, 17)
      <widget class="QPushButton" name="btnlogout">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>450</y>
+        <x>53</x>
+        <y>430</y>
         <width>111</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-radius: 10px;
+       <string notr="true">border: 1px solid black;
+border-radius: 10px;
 color: rgb(255, 255, 255);
 background-color: rgb(255, 2, 69);
 
@@ -100,11 +105,11 @@ background-color: rgb(255, 2, 69);
        <string>Logout</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="fazerchamada">
+     <widget class="QPushButton" name="btnchamada">
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>230</y>
+        <y>200</y>
         <width>121</width>
         <height>41</height>
        </rect>
@@ -116,19 +121,20 @@ background-color: rgb(255, 2, 69);
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-radius: 10px;
+       <string notr="true">border: 1px solid black;
+border-radius: 10px;
 background-color: rgb(255, 176, 17)
 </string>
       </property>
       <property name="text">
-       <string>Realizar Chamada</string>
+       <string>Chamada</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btninformacoes">
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>290</y>
+        <y>260</y>
         <width>121</width>
         <height>41</height>
        </rect>
@@ -140,7 +146,8 @@ background-color: rgb(255, 176, 17)
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-radius: 10px;
+       <string notr="true">border: 1px solid black;
+border-radius: 10px;
 background-color: rgb(255, 176, 17)
 </string>
       </property>
@@ -151,8 +158,8 @@ background-color: rgb(255, 176, 17)
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>10</y>
+        <x>240</x>
+        <y>100</y>
         <width>500</width>
         <height>500</height>
        </rect>
@@ -167,10 +174,10 @@ background-color: rgb(255, 176, 17)
      <widget class="QLabel" name="labelnomebemvindo">
       <property name="geometry">
        <rect>
-        <x>250</x>
-        <y>20</y>
-        <width>491</width>
-        <height>71</height>
+        <x>240</x>
+        <y>14</y>
+        <width>501</width>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
@@ -180,12 +187,54 @@ background-color: rgb(255, 176, 17)
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
+       <string notr="true">background-color: rgb(58, 108, 184);
+color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>-70</x>
+        <y>0</y>
+        <width>500</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>linhadecima.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>0</y>
+        <width>751</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>linhadecima.png</pixmap>
+      </property>
+     </widget>
+     <zorder>label_3</zorder>
+     <zorder>label_2</zorder>
+     <zorder>titulobemvindo</zorder>
+     <zorder>btnminhaturmaprof</zorder>
+     <zorder>btnlogout</zorder>
+     <zorder>btnchamada</zorder>
+     <zorder>btninformacoes</zorder>
+     <zorder>label</zorder>
+     <zorder>labelnomebemvindo</zorder>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -195,39 +244,28 @@ background-color: rgb(255, 176, 17)
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>210</y>
+        <y>240</y>
         <width>611</width>
         <height>271</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
+       <string notr="true">border: 1px solid black;
+background-color: rgb(255, 255, 255);</string>
       </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>304</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Nome</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Turma</string>
-       </property>
-      </column>
      </widget>
      <widget class="QPushButton" name="btnbuscaraluno">
       <property name="geometry">
        <rect>
         <x>570</x>
-        <y>90</y>
+        <y>120</y>
         <width>101</width>
         <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
+       <string notr="true">border: 2px solid black;
+background-color: rgb(241, 181, 0);
 border-radius: 10px
 </string>
       </property>
@@ -239,7 +277,7 @@ border-radius: 10px
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>89</y>
+        <y>119</y>
         <width>471</width>
         <height>31</height>
        </rect>
@@ -250,21 +288,23 @@ border-radius: 10px
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:10px</string>
+       <string notr="true">border: 2px solid black;
+background-color: rgb(255, 255, 255);
+border-radius:10px
+</string>
       </property>
       <property name="text">
        <string/>
       </property>
       <property name="placeholderText">
-       <string>Nome Completo do Aluno</string>
+       <string>Aluno</string>
       </property>
      </widget>
      <widget class="QLabel" name="labelnota">
       <property name="geometry">
        <rect>
-        <x>293</x>
-        <y>169</y>
+        <x>309</x>
+        <y>199</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -275,17 +315,17 @@ border-radius:10px</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
+       <string notr="true">color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
        <string>Nota:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="inputanota">
+     <widget class="QLineEdit" name="inputaddnota">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>170</y>
+        <x>376</x>
+        <y>200</y>
         <width>51</width>
         <height>31</height>
        </rect>
@@ -296,7 +336,8 @@ border-radius:10px</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
+       <string notr="true">border: 1px solid black;
+background-color: rgb(255, 255, 255);
 border-radius:10px</string>
       </property>
       <property name="text">
@@ -307,13 +348,14 @@ border-radius:10px</string>
       <property name="geometry">
        <rect>
         <x>460</x>
-        <y>170</y>
+        <y>200</y>
         <width>101</width>
         <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(92, 184, 0);
+       <string notr="true">border: 1px solid black;
+background-color: rgb(92, 184, 0);
 border-radius: 10px
 </string>
       </property>
@@ -325,13 +367,14 @@ border-radius: 10px
       <property name="geometry">
        <rect>
         <x>570</x>
-        <y>170</y>
+        <y>200</y>
         <width>101</width>
         <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(208, 58, 60);
+       <string notr="true">border: 1px solid black;
+background-color: rgb(208, 58, 60);
 border-radius: 10px
 </string>
       </property>
@@ -343,7 +386,7 @@ border-radius: 10px
       <property name="geometry">
        <rect>
         <x>67</x>
-        <y>93</y>
+        <y>123</y>
         <width>20</width>
         <height>20</height>
        </rect>
@@ -359,7 +402,7 @@ border-radius: 10px
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>170</y>
+        <y>200</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -370,34 +413,15 @@ border-radius: 10px
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
+       <string notr="true">border: 1px solid black;
+background-color: rgb(255, 255, 255);</string>
       </property>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>101</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>102</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>103</string>
-       </property>
-      </item>
      </widget>
      <widget class="QLabel" name="labelturmasprof">
       <property name="geometry">
        <rect>
         <x>69</x>
-        <y>169</y>
+        <y>199</y>
         <width>106</width>
         <height>29</height>
        </rect>
@@ -408,7 +432,11 @@ border-radius: 10px
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
+       <string notr="true">color: rgb(0, 0, 0);
+
+
+
+</string>
       </property>
       <property name="text">
        <string>Turma(s):</string>
@@ -418,16 +446,74 @@ border-radius: 10px
       <property name="geometry">
        <rect>
         <x>100</x>
-        <y>70</y>
+        <y>100</y>
         <width>461</width>
         <height>16</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 0, 0);</string>
+       <string notr="true">
+color: rgb(255, 0, 0);</string>
       </property>
       <property name="text">
        <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>500</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../loucura/linhadecima.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>0</y>
+        <width>500</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../loucura/linhadecima.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelfodase1">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>3</y>
+        <width>96</width>
+        <height>57</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(58, 108, 184);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>logomtpequeno.png</pixmap>
       </property>
      </widget>
     </widget>

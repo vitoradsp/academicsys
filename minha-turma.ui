@@ -7,21 +7,21 @@
     <x>0</x>
     <y>0</y>
     <width>657</width>
-    <height>551</height>
+    <height>636</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Minha Turma</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(60, 108, 184);</string>
+   <string notr="true">background-color: rgb(218, 218, 218);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="titulosuaturma">
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>30</y>
+      <y>100</y>
       <width>205</width>
       <height>43</height>
      </rect>
@@ -43,7 +43,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>40</y>
+      <y>106</y>
       <width>260</width>
       <height>31</height>
      </rect>
@@ -55,7 +55,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(131, 131, 131);</string>
     </property>
     <property name="text">
      <string/>
@@ -65,13 +65,14 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>80</y>
+      <y>160</y>
       <width>481</width>
       <height>451</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);
+     <string notr="true">border: 1px solid black;
+background-color: rgb(255, 255, 255);
 </string>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
@@ -90,6 +91,38 @@
       <string>Data de Nascimento</string>
      </property>
     </column>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>500</width>
+      <height>73</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>linhadecima.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>499</x>
+      <y>0</y>
+      <width>500</width>
+      <height>73</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>linhadecima.png</pixmap>
+    </property>
    </widget>
   </widget>
  </widget>

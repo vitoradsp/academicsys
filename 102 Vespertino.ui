@@ -7,27 +7,27 @@
     <x>0</x>
     <y>0</y>
     <width>676</width>
-    <height>561</height>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Horarios</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(58, 108, 184);</string>
+   <string notr="true">background-color: rgb(218, 218, 218);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>190</y>
+      <y>74</y>
       <width>561</width>
       <height>241</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
+     <string notr="true">border: 1px solid black;
 background-color: rgb(225, 225, 225);
 border-color: rgb(0, 0, 0)
 </string>
@@ -382,27 +382,11 @@ border-color: rgb(0, 0, 0)
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>-80</x>
-      <y>0</y>
-      <width>800</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../Telas Prontas/Sem Título-6.png</pixmap>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnvoltar2">
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>470</y>
+      <y>360</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -419,7 +403,7 @@ border-radius:10px</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>166</y>
+      <y>50</y>
       <width>67</width>
       <height>21</height>
      </rect>
@@ -442,7 +426,7 @@ color: rgb(255, 170, 0);</string>
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>162</y>
+      <y>46</y>
       <width>201</width>
       <height>27</height>
      </rect>
