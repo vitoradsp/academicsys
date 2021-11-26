@@ -107,6 +107,13 @@ def buscar_aluno_por_cpf(cpf):
     cursor.execute(f"SELECT rowid, * FROM alunos WHERE cpf={cpf}")
     return cursor.fetchone()
 
+def buscar_aluno_por_nome(nome,turma):
+    criar_tabela_alunos()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"SELECT * FROM alunos WHERE nome LIKE '%{nome}%' AND turma LIKE %'{turma}'%")
+    return cursor.fetchall()
+
 def buscar_aluno_por_id(usuario_id):
     criar_tabela_alunos()
     banco = conectar()

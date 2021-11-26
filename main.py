@@ -55,8 +55,6 @@ def logar():
 def registrar_professor():
     nome = tela_registro.inputnomeprofessor.text()
     cpf = tela_registro.inputcpfprofessor.text()
-    endereco = tela_registro.inputenderecoprofessor.text()
-    complemento = tela_registro.inputcomplementoprofessor.text()
     materia = tela_registro.materiaprofessor.currentText()
     senha = tela_registro.inputsenhaprofessor.text()
     csenha = tela_registro.inputcsenhaprofessor.text()
@@ -69,7 +67,7 @@ def registrar_professor():
         turma.append("102")
     if tela_registro.t103.isChecked() == True:
         turma.append("103")
-    if nome == "" or cpf == '' or endereco == '' or complemento == '' or senha == '' or csenha == '' or usuario == '' or turma == [] or materia == "":
+    if nome == "" or cpf == '' or senha == '' or csenha == '' or usuario == '' or turma == [] or materia == "":
         tela_registro.aviso.setText("Campo(s) em branco.")
     elif csenha != senha:
         tela_registro.aviso.setText("Senhas nao correspondem.")
@@ -84,22 +82,20 @@ def registrar_professor():
             tela_registro.aviso.setText("Erro! Usuario Ja utilizado!")
         else:
             tela_registro.aviso.setText("")
-            banco.inserir_professor(nome,cpf,endereco,complemento,turma)        
+            banco.inserir_professor(nome,cpf,turma)        
             banco.inserir_usuario(usuario, senha, "Professor")
             tela_registro.aviso.setText("Sucesso no registro.")
 
 def registrar_aluno():
     nome = tela_registro.inputnomealuno.text()
     cpf = tela_registro.inputcpfaluno.text()
-    endereco = tela_registro.inputenderecoaluno.text()
-    complemento = tela_registro.inputcomplementoaluno.text()
     senha = tela_registro.inputsenhaaluno.text()
     csenha = tela_registro.inputcsenhaaluno.text()
     usuario = tela_registro.inputusuarioaluno.text()
     turma = tela_registro.turmabox.currentText()
     curso = tela_registro.cursobox.currentText()
     data_de_nascimento = tela_registro.inputdatadenascimentoaluno.text()
-    if nome == "" or cpf == '' or endereco == '' or complemento == '' or senha == '' or csenha == '' or usuario == '' or turma == '' or curso == '' or data_de_nascimento == "//":
+    if nome == "" or cpf == '' or senha == '' or csenha == '' or usuario == '' or turma == '' or curso == '' or data_de_nascimento == "//":
         tela_registro.erro.setText("Campo(s) em branco.")
     elif csenha != senha:
         tela_registro.erro.setText("Senhas Nao coincidem!")
@@ -168,7 +164,22 @@ def voltar_tela_diretor():
     tela_registro.close()
     tela_login.show()
 
-
+def buscar_aluno_tela_professor():
+    nome = tela_professores.inputbuscaraluno.text()
+    turma = tela_professores.comboturmas.currentText()
+    tabela = tela_professores.tablealunosprof
+    quant_row = 0
+    if turma == '' or nome == '':
+        tela_professores.label_erro.setText("Por favor, preencha todos os campos.")
+    else:
+        tela_professores.label_erro.setText("")
+        info_aluno = banco.buscar_aluno_por_nome(nome,turma)
+        if info_aluno is None:
+            tela_professores.label_erro.setText("Nenhum aluno encontrado.")
+        for x in info_aluno:
+            tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
+            tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
+            quant_row += 1  
 
 
 if __name__ == "__main__":
@@ -192,7 +203,7 @@ if __name__ == "__main__":
     tela_registro.btnvoltarcadastro2.clicked.connect(voltar_tela_diretor)
     tela_registro.btnvoltarcadastro.clicked.connect(voltar_tela_diretor)
 
-
+    tela_professores.btnbuscaraluno.clicked.connect(buscar_aluno_tela_professor)
 
     tela_alunos.btndadosescolares.clicked.connect(visualizar_dados_escolares)
     tela_alunos.btnminhaturma.clicked.connect(mostrar_alunos_minha_turma)
