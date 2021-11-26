@@ -7,35 +7,35 @@ def conectar():
 def criar_tabela_usuario():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS usuarios(usuario TEXT, senha TEXT, cargo TEXT)')
+    cursor.execute('CREATE TABLE IF NOT EXISTS usuarios (usuario TEXT, senha TEXT, cargo TEXT);')
     banco.commit()
     banco.close()
 
 def criar_tabela_falta_alunos():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS faltaalunos(faltas INTEGER, usuario_id INTEGER, FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
+    cursor.execute('CREATE TABLE IF NOT EXISTS faltaalunos (faltas INTEGER, usuario_id INTEGER, FOREIGN KEY(usuario_id) REFERENCES usuarios(id));')
     banco.commit()
     banco.close()
 
 def criar_tabela_nota_aluno():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS notasaluno(nota1 TEXT, nota2 TEXT, nota3 TEXT, materia TEXT, usuario_id INTEGER , FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
+    cursor.execute('CREATE TABLE IF NOT EXISTS notasaluno (nota1 TEXT, nota2 TEXT, nota3 TEXT, materia TEXT, usuario_id INTEGER , FOREIGN KEY(usuario_id) REFERENCES usuarios(id));')
     banco.commit()
     banco.close()
 
 def criar_tabela_alunos():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS alunos(nome TEXT, cpf INTEGER, turma TEXT, curso TEXT, datadenascimento TEXT, usuario_id INTEGER, FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
+    cursor.execute('CREATE TABLE IF NOT EXISTS alunos (nome TEXT, cpf INTEGER, turma TEXT, curso TEXT, datadenascimento TEXT, usuario_id INTEGER, FOREIGN KEY(usuario_id) REFERENCES usuarios(id));')
     banco.commit()
     banco.close()
 
 def criar_tabela_professores():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS professores(nome TEXT, cpf INTEGER, turma TEXT)')
+    cursor.execute('CREATE TABLE IF NOT EXISTS professores (nome TEXT, cpf INTEGER, turma TEXT);')
     banco.commit()
     banco.close()
     

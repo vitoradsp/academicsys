@@ -253,6 +253,39 @@ color: rgb(255, 255, 255);</string>
        <string notr="true">border: 1px solid black;
 background-color: rgb(255, 255, 255);</string>
       </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>101</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Aluno</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Turma</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Falta(s)</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nota 1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nota 2</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nota 3</string>
+       </property>
+      </column>
      </widget>
      <widget class="QPushButton" name="btnbuscaraluno">
       <property name="geometry">

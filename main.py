@@ -174,12 +174,18 @@ def buscar_aluno_tela_professor():
     else:
         tela_professores.label_erro.setText("")
         info_aluno = banco.buscar_aluno_por_nome(nome, turma)
-        if info_aluno == []:
+        if info_aluno is None:
             tela_professores.label_erro.setText("Nenhum aluno encontrado.")
         for x in info_aluno:
             tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
             tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
             quant_row += 1  
+
+def add_nota_para_aluno():
+    aluno = tela_professores.inputbuscaraluno.text()
+    
+
+
 
 
 if __name__ == "__main__":
