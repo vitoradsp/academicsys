@@ -14,7 +14,7 @@ def criar_tabela_usuario():
 def criar_tabela_falta_alunos():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS faltaalunos(faltas INTEGER, usuario_id INTEGER NOT NULL, FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
+    cursor.execute('CREATE TABLE IF NOT EXISTS faltaalunos(faltas INTEGER, usuario_id INTEGER, FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
     banco.commit()
     banco.close()
 
@@ -28,14 +28,14 @@ def criar_tabela_nota_aluno():
 def criar_tabela_alunos():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS alunos(nome TEXT, sobrenome TEXT, cpf INTEGER, endereco TEXT, complemento TEXT, turma TEXT, curso TEXT, datadenascimento TEXT, usuario_id INTEGER NOT NULL, FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
+    cursor.execute('CREATE TABLE IF NOT EXISTS alunos(nome TEXT, cpf INTEGER, turma TEXT, curso TEXT, datadenascimento TEXT, usuario_id INTEGER, FOREIGN KEY(usuario_id) REFERENCES usuarios(id))')
     banco.commit()
     banco.close()
 
 def criar_tabela_professores():     
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS professores(nome TEXT, sobrenome TEXT, cpf INTEGER, endereco TEXT, complemento TEXT, turma TEXT)')
+    cursor.execute('CREATE TABLE IF NOT EXISTS professores(nome TEXT, cpf INTEGER, turma TEXT)')
     banco.commit()
     banco.close()
     
@@ -111,7 +111,7 @@ def buscar_aluno_por_nome(nome,turma):
     criar_tabela_alunos()
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute(f"SELECT * FROM alunos WHERE nome LIKE '%{nome}%' AND turma LIKE %'{turma}'%")
+    cursor.execute(f"SELECT * FROM alunos WHERE nome LIKE '%{nome}%' AND turma LIKE '%{turma}%'")
     return cursor.fetchall()
 
 def buscar_aluno_por_id(usuario_id):

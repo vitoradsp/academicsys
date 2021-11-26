@@ -173,8 +173,8 @@ def buscar_aluno_tela_professor():
         tela_professores.label_erro.setText("Por favor, preencha todos os campos.")
     else:
         tela_professores.label_erro.setText("")
-        info_aluno = banco.buscar_aluno_por_nome(nome,turma)
-        if info_aluno is None:
+        info_aluno = banco.buscar_aluno_por_nome(nome, turma)
+        if info_aluno == []:
             tela_professores.label_erro.setText("Nenhum aluno encontrado.")
         for x in info_aluno:
             tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
