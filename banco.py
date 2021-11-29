@@ -132,7 +132,7 @@ def buscar_aluno_por_nome_e_turma(nome,turma):
     criar_tabela_alunos()
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute(f"SELECT * FROM alunos WHERE nome LIKE '%{nome}%' AND turma LIKE '%{turma}%'")
+    cursor.execute(f"SELECT * FROM alunos WHERE nome='{nome}' AND turma='{turma}'")
     return cursor.fetchall()
 
 def buscar_aluno_por_id(usuario_id):
@@ -141,13 +141,6 @@ def buscar_aluno_por_id(usuario_id):
     cursor = banco.cursor()
     cursor.execute(f"SELECT rowid, * FROM alunos WHERE usuario_id={usuario_id}")
     return cursor.fetchone()
-
-def deletar_notas_materia(materia):
-    criar_tabela_alunos()
-    banco = conectar()
-    cursor = banco.cursor()
-    cursor.execute(f"DELETE FROM notasaluno WHERE materia='{materia}'")
-    return cursor.fetchall()
 
 def buscar_alunos_mesma_turma(turma):
     criar_tabela_alunos()
@@ -164,6 +157,13 @@ def alterar_usuario(nome, senha, cargo):
     banco.commit()
     banco.close()
 
+def deletar_notas_materia(materia):
+    criar_tabela_alunos()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"DELETE FROM notasaluno WHERE materia='{materia}'")
+    return cursor.fetchall()
+
 def deletar_usuario(usuario):
     criar_tabela_usuario()
     banco = conectar()
@@ -175,5 +175,6 @@ def deletar_usuario(usuario):
 if __name__ == "__main__":
     criar_tabela_usuario()
     inserir_usuario("123", "123", "Diretor")    
-    inserir_falta_para_aluno(2912,2)
-    inserir_notas_aluno(1,2,3,'Portugues',2)
+    #inserir_aluno("Vitor Augusto", 13232321234, "Ingles", "18/10/2001", 101, 2)
+    inserir_falta_para_aluno(2912,3)
+    #inserir_notas_aluno(1,2,3,'Portugues', 2)

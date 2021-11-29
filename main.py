@@ -82,8 +82,9 @@ def registrar_professor():
             tela_registro.aviso.setText("Erro! Usuario Ja utilizado!")
         else:
             tela_registro.aviso.setText("")
-            banco.inserir_professor(nome,cpf,turma, materia, )        
             banco.inserir_usuario(usuario, senha, "Professor")
+            verificar_existencia_usuario = banco.buscar_usuario(usuario)
+            banco.inserir_professor(nome,cpf,turma, materia, verificar_existencia_usuario[0])        
             tela_registro.aviso.setText("Sucesso no registro.")
 
 def registrar_aluno():
@@ -170,25 +171,26 @@ def buscar_aluno_tela_professor():
     turma = tela_professores.comboturmas.currentText()
     tabela = tela_professores.tablealunosprof
     user_i = banco.buscar_usuario(user)
-    prof = banco.buscar_professor_user_id(user_i[3])
+    prof = banco.buscar_professor_user_id(user_i[0])
     quant_row = 0
     if turma == '' or nome == '':
         tela_professores.label_erro.setText("Por favor, preencha todos os campos.")
     else:
         tela_professores.label_erro.setText("")
         info_aluno = banco.buscar_aluno_por_nome_e_turma(nome, turma)
-        search_faltas = banco.buscar_faltas_por_user_id(info_aluno[5])
-        search_notas = banco.buscar_nota_por_materia(prof[4])
         if info_aluno is None:
-            tela_professores.label_erro.setText("Nenhum aluno encontrado.")
-        for x in info_aluno:
-            tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
-            tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
-            tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{len(search_faltas - 1)}"))
-            tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
-            tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
-            tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
-            quant_row += 1  
+            tela_professores.label_erro.setText("Aluno nao encontrado.")
+        else:
+            search_faltas = banco.buscar_faltas_por_user_id(info_aluno[5])
+            search_notas = banco.buscar_nota_por_materia(prof[4])
+            for x in info_aluno:
+                tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
+                tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+                tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{len(search_faltas - 1)}"))
+                tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
+                tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
+                tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
+                quant_row += 1
 
 def add_nota_para_aluno():
     aluno = tela_professores.inputbuscaraluno.text()
