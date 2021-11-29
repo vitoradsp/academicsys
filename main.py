@@ -55,7 +55,7 @@ def logar():
 def registrar_professor():
     nome = tela_registro.inputnomeprofessor.text()
     cpf = tela_registro.inputcpfprofessor.text()
-    materia = tela_registro.materiaprofessor.currentText()
+    materia = tela_registro.inputmateria.currentText()
     senha = tela_registro.inputsenhaprofessor.text()
     csenha = tela_registro.inputcsenhaprofessor.text()
     usuario = tela_registro.inputusuarioprofessor.text()
@@ -82,7 +82,7 @@ def registrar_professor():
             tela_registro.aviso.setText("Erro! Usuario Ja utilizado!")
         else:
             tela_registro.aviso.setText("")
-            banco.inserir_professor(nome,cpf,turma)        
+            banco.inserir_professor(nome,cpf,turma, materia, )        
             banco.inserir_usuario(usuario, senha, "Professor")
             tela_registro.aviso.setText("Sucesso no registro.")
 
@@ -165,27 +165,45 @@ def voltar_tela_diretor():
     tela_login.show()
 
 def buscar_aluno_tela_professor():
+    user = tela_login.inputnome.text()
     nome = tela_professores.inputbuscaraluno.text()
     turma = tela_professores.comboturmas.currentText()
     tabela = tela_professores.tablealunosprof
+    user_i = banco.buscar_usuario(user)
+    prof = banco.buscar_professor_user_id(user_i[3])
     quant_row = 0
     if turma == '' or nome == '':
         tela_professores.label_erro.setText("Por favor, preencha todos os campos.")
     else:
         tela_professores.label_erro.setText("")
-        info_aluno = banco.buscar_aluno_por_nome(nome, turma)
+        info_aluno = banco.buscar_aluno_por_nome_e_turma(nome, turma)
+        search_faltas = banco.buscar_faltas_por_user_id(info_aluno[5])
+        search_notas = banco.buscar_nota_por_materia(prof[4])
         if info_aluno is None:
             tela_professores.label_erro.setText("Nenhum aluno encontrado.")
         for x in info_aluno:
             tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
-            tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
+            tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+            tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{len(search_faltas - 1)}"))
+            tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
+            tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
+            tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
             quant_row += 1  
 
 def add_nota_para_aluno():
     aluno = tela_professores.inputbuscaraluno.text()
-    
-
-
+    nota = tela_professores.inputaddnota.text()
+    turma = tela_professores.comboturmas.currentText()
+    tabela = tela_professores.tablealunosprof
+    total_row = 0
+    if aluno == "" or nota == "" or turma == "":
+        tela_professores.label_erro.setText("ERRO! Campo(s) em branco.")
+    else:
+        searched = banco.buscar_aluno_por_nome_e_turma(aluno, turma)
+        for x in searched:
+            tabela.setItem(total_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
+            tabela.setItem(total_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
+            total_row += 1  
 
 
 if __name__ == "__main__":
@@ -210,6 +228,7 @@ if __name__ == "__main__":
     tela_registro.btnvoltarcadastro.clicked.connect(voltar_tela_diretor)
 
     tela_professores.btnbuscaraluno.clicked.connect(buscar_aluno_tela_professor)
+    tela_professores.btnadicionaraluno.clicked.connect(add_nota_para_aluno)
 
     tela_alunos.btndadosescolares.clicked.connect(visualizar_dados_escolares)
     tela_alunos.btnminhaturma.clicked.connect(mostrar_alunos_minha_turma)

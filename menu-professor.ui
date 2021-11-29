@@ -492,7 +492,7 @@ background-color: rgb(255, 255, 255);</string>
 </string>
       </property>
       <property name="text">
-       <string>Turma(s):</string>
+       <string>Turma:</string>
       </property>
      </widget>
      <widget class="QLabel" name="labelalunoerro">

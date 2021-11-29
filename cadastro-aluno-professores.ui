@@ -656,8 +656,8 @@ border-radius:10px</string>
      <widget class="QLineEdit" name="inputusuarioprofessor">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>273</y>
+        <x>210</x>
+        <y>280</y>
         <width>251</width>
         <height>41</height>
        </rect>
@@ -829,6 +829,31 @@ border-radius:10px
       </property>
       <property name="text">
        <string>Voltar</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="inputmateria">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>280</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">	font: 8pt &quot;MS Shell Dlg 2&quot;;
+border: 1px solid black;	
+background-color: rgb(255, 255, 255);
+border-radius:10px</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Normal</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Materia</string>
       </property>
      </widget>
     </widget>
