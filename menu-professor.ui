@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(218, 218, 218);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -328,27 +328,6 @@ border-radius:10px
        <string>Nome completo do aluno</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelnota">
-      <property name="geometry">
-       <rect>
-        <x>309</x>
-        <y>199</y>
-        <width>91</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(0, 0, 0);</string>
-      </property>
-      <property name="text">
-       <string>Nota:</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="inputaddnota">
       <property name="geometry">
        <rect>
@@ -360,13 +339,17 @@ border-radius:10px
       </property>
       <property name="font">
        <font>
-        <pointsize>14</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 1px solid black;
 background-color: rgb(255, 255, 255);
-border-radius:10px</string>
+
+</string>
+      </property>
+      <property name="inputMask">
+       <string>00</string>
       </property>
       <property name="text">
        <string/>
@@ -429,8 +412,8 @@ border-radius: 10px
      <widget class="QComboBox" name="comboturmas">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>200</y>
+        <x>154</x>
+        <y>199</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -470,7 +453,7 @@ background-color: rgb(255, 255, 255);</string>
        <rect>
         <x>69</x>
         <y>199</y>
-        <width>106</width>
+        <width>81</width>
         <height>29</height>
        </rect>
       </property>
@@ -590,306 +573,39 @@ color: rgb(255, 0, 0);</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>Chamada</string>
-     </attribute>
-     <widget class="QLineEdit" name="inputbuscaralunofaltas">
+     <widget class="QComboBox" name="combonotas">
       <property name="geometry">
        <rect>
-        <x>90</x>
-        <y>119</y>
-        <width>471</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid black;
-background-color: rgb(255, 255, 255);
-border-radius:10px
-</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="placeholderText">
-       <string>Nome completo do aluno</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelturmasprof_3">
-      <property name="geometry">
-       <rect>
-        <x>69</x>
-        <y>199</y>
-        <width>106</width>
-        <height>29</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(0, 0, 0);
-
-
-
-</string>
-      </property>
-      <property name="text">
-       <string>Turma:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_11">
-      <property name="geometry">
-       <rect>
-        <x>500</x>
-        <y>0</y>
-        <width>500</width>
-        <height>73</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>../../loucura/linhadecima.png</pixmap>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboturmasfaltas">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
+        <x>308</x>
         <y>200</y>
-        <width>101</width>
+        <width>61</width>
         <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border: 1px solid black;
-background-color: rgb(255, 255, 255);</string>
-      </property>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>101</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>102</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>103</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLabel" name="label_12">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>500</width>
-        <height>73</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>../../loucura/linhadecima.png</pixmap>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="buscaralunofaltas">
-      <property name="geometry">
-       <rect>
-        <x>570</x>
-        <y>120</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid black;
-background-color: rgb(241, 181, 0);
-border-radius: 10px
-</string>
-      </property>
-      <property name="text">
-       <string>Buscar</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="removerfalta">
-      <property name="geometry">
-       <rect>
-        <x>570</x>
-        <y>200</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border: 1px solid black;
-background-color: rgb(208, 58, 60);
-border-radius: 10px
-</string>
-      </property>
-      <property name="text">
-       <string>Remover</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_erro_3">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>160</y>
-        <width>601</width>
-        <height>16</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
        </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 0, 0);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="adicionarfalta">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>200</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border: 1px solid black;
-background-color: rgb(92, 184, 0);
-border-radius: 10px
-</string>
-      </property>
-      <property name="text">
-       <string>Adicionar</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="iconbuscar_3">
-      <property name="geometry">
-       <rect>
-        <x>67</x>
-        <y>123</y>
-        <width>20</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>icon.png</pixmap>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tabelafaltas">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>240</y>
-        <width>611</width>
-        <height>271</height>
-       </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 1px solid black;
 background-color: rgb(255, 255, 255);</string>
       </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>203</number>
-      </attribute>
-      <column>
+      <item>
        <property name="text">
-        <string>Aluno</string>
+        <string>Nota 1</string>
        </property>
-      </column>
-      <column>
+      </item>
+      <item>
        <property name="text">
-        <string>Turma</string>
+        <string>Nota 2</string>
        </property>
-      </column>
-      <column>
+      </item>
+      <item>
        <property name="text">
-        <string>Falta(s)</string>
+        <string>Nota 3</string>
        </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="labelalunoerro_3">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>100</y>
-        <width>461</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">
-color: rgb(255, 0, 0);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelfodase1_3">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>3</y>
-        <width>96</width>
-        <height>57</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(58, 108, 184);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>logomtpequeno.png</pixmap>
-      </property>
+      </item>
      </widget>
     </widget>
    </widget>

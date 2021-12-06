@@ -5,7 +5,7 @@ import datetime
 
 #########################################################################################################################
 #                                              Sistema Academico                                                        #
-#         Diretor - Gerencia registramento de professores e dos horarios escolares                                      #
+#         Secretaria - Gerencia registramento de professores e dos horarios escolares                                      #
 #         Professor - Adiciona Notas e gerencia falta(s) do aluno.                                                      #
 #         Aluno - Checa suas notas e faltas de certas materias, assim como seu resultado final (Aprovado, Reprovado).   #
 #                                                                                                                       #
@@ -22,7 +22,7 @@ def logar():
     elif verificar_usuario[2] != senha:
         tela_login.erro.setText("Dados nao conferem.")
     else:
-        if verificar_usuario[3] == "Diretor":
+        if verificar_usuario[3] == "Secretaria":
             tela_registro.show()
             tela_login.close()
         elif verificar_usuario[3] == "Aluno":
@@ -111,7 +111,7 @@ def registrar_aluno():
             tela_registro.erro.setText("")
             banco.inserir_usuario(usuario,senha, "Aluno")
             verificar_usuario = banco.buscar_usuario(usuario)
-            banco.inserir_aluno(nome, cpf, curso, data_de_nascimento, turma, verificar_usuario[0])            
+            banco.inserir_aluno(nome, turma, cpf, curso, data_de_nascimento, verificar_usuario[0])            
             tela_registro.erro.setText("Sucesso no registro.")
 
 def mostrar_alunos_minha_turma():
@@ -173,15 +173,36 @@ def buscar_aluno_tela_professor():
     user_i = banco.buscar_usuario(user)
     prof = banco.buscar_professor_user_id(user_i[0])
     quant_row = 0
-    if turma == '' or nome == '':
-        tela_professores.label_erro.setText("Por favor, preencha todos os campos.")
+    if turma == '':
+        tela_professores.label_erro.setText("Campo turma obrigatorio.")
     else:
         tela_professores.label_erro.setText("")
         info_aluno = banco.buscar_aluno_por_nome_e_turma(nome, turma)
-        if info_aluno == []:
-            tela_professores.label_erro.setText("Aluno nao encontrado.")
+        if info_aluno is None and nome == '':
+            search_all = banco.buscar_toda_turma(turma)
+            search_notas = banco.buscar_todas_notas_por_materia(prof[4])
+            tabela.setRowCount(len(search_notas + search_all))                
+            if search_notas == []:
+                for x in search_all:
+                    tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
+                    tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+                    tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"0"))
+                    tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"0"))
+                    tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"0"))
+                    quant_row += 1
+            else:
+                for x in search_all:
+                    tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
+                    tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+                    tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
+                    tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
+                    tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
+                    quant_row += 1
         else:
-            search_notas = banco.buscar_nota_por_materia(prof[4])
+            search_notas = banco.buscar_nota_por_materia(prof[4], info_aluno[0])
+            a = tabela.setRowCount(len(info_aluno))
+            b = tabela.setRowCount(len(search_notas))
+            tabela.setRowCount(len(a + b))
             for x in info_aluno:
                 tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
                 tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
@@ -191,19 +212,34 @@ def buscar_aluno_tela_professor():
                 quant_row += 1
 
 def add_nota_para_aluno():
+    user = tela_login.inputnome.text()
     aluno = tela_professores.inputbuscaraluno.text()
     nota = tela_professores.inputaddnota.text()
     turma = tela_professores.comboturmas.currentText()
+    user_i = banco.buscar_usuario(user)
+    prof = banco.buscar_professor_user_id(user_i[0])
     tabela = tela_professores.tablealunosprof
+    def_nota = tela_professores.combonotas.currentText()
     total_row = 0
     if aluno == "" or nota == "" or turma == "":
         tela_professores.label_erro.setText("ERRO! Campo(s) em branco.")
     else:
         searched = banco.buscar_aluno_por_nome_e_turma(aluno, turma)
-        for x in searched:
-            tabela.setItem(total_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
-            tabela.setItem(total_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
-            total_row += 1  
+        if searched != None:
+            if def_nota == "Nota 1":
+                banco.inserir_notas_aluno(nota,0,0,prof[4], searched[5])
+            elif def_nota == "Nota 2":
+                b = banco.buscar_nota_por_materia(prof[4], searched[5])
+                banco.inserir_notas_aluno(b[0],nota, 0, prof[4], searched[5])
+            elif def_nota == "Nota 3":
+                b = banco.buscar_nota_por_materia(prof[4], searched[5])
+                banco.inserir_notas_aluno(b[0],b[1], nota, prof[4], searched[5])
+            for x in searched:
+                tabela.setItem(total_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
+                tabela.setItem(total_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+                tabela.setItem(total_row, 2, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+                
+                total_row += 1  
 
 
 if __name__ == "__main__":
