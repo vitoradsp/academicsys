@@ -178,18 +178,16 @@ def buscar_aluno_tela_professor():
     else:
         tela_professores.label_erro.setText("")
         info_aluno = banco.buscar_aluno_por_nome_e_turma(nome, turma)
-        if info_aluno is None:
+        if info_aluno == []:
             tela_professores.label_erro.setText("Aluno nao encontrado.")
         else:
-            search_faltas = banco.buscar_faltas_por_user_id(info_aluno[5])
             search_notas = banco.buscar_nota_por_materia(prof[4])
             for x in info_aluno:
                 tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
                 tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
-                tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{len(search_faltas - 1)}"))
-                tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
-                tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
-                tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
+                tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
+                tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
+                tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
                 quant_row += 1
 
 def add_nota_para_aluno():
