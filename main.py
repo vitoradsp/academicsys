@@ -181,11 +181,11 @@ def buscar_aluno_tela_professor():
         if info_aluno is None and nome == '':
             search_all = banco.buscar_toda_turma(turma)
             search_notas = banco.buscar_todas_notas_por_materia(prof[4])
-            tabela.setRowCount(len(search_notas + search_all))                
+            tabela.setRowCount(len(search_all))                
             if search_notas == []:
                 for x in search_all:
                     tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
-                    tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+                    tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
                     tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"0"))
                     tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"0"))
                     tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"0"))
@@ -194,10 +194,12 @@ def buscar_aluno_tela_professor():
                 for x in search_all:
                     tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
                     tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
-                    tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
-                    tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
-                    tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
                     quant_row += 1
+                    for y in search_notas:
+                        tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{y[1]}"))
+                        tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{y[2]}"))
+                        tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{y[3]}"))
+                        quant_row += 1
         else:
             search_notas = banco.buscar_nota_por_materia(prof[4], info_aluno[0])
             a = tabela.setRowCount(len(info_aluno))
