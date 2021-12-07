@@ -51,7 +51,15 @@ def inserir_notas_aluno(nota1, nota2, nota3, materia, usuario_id):
     criar_tabela_nota_aluno()
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute(f"UPDATE notasaluno SET nota1={nota1}, nota2={nota2}, nota3={nota3}, materia='{materia}' WHERE usuario_id={usuario_id}")
+    cursor.execute(f"INSERT INTO notasaluno VALUES('{nota1}', '{nota2}', '{nota3}', '{materia}', {usuario_id})")
+    banco.commit()
+    banco.close()
+
+def editar_notas_aluno(nota1, nota2, nota3, materia, usuario_id):
+    criar_tabela_nota_aluno()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"UPDATE notasaluno SET nota1='{nota1}', nota2='{nota2}', nota3='{nota3}', materia='{materia}' WHERE usuario_id={usuario_id}")
     banco.commit()
     banco.close()
 

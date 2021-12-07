@@ -1,7 +1,7 @@
 from datetime import datetime
 import sys, banco
 from PyQt5 import uic, QtWidgets
-import datetime
+from datetime import date
 
 #########################################################################################################################
 #                                              Sistema Academico                                                        #
@@ -27,11 +27,11 @@ def logar():
             tela_login.close()
         elif verificar_usuario[3] == "Aluno":
             aluno = banco.buscar_aluno_por_id(verificar_usuario[0])
-            notas = banco.buscar_notas(aluno[9])
+            notas = banco.buscar_notas(aluno[2])
             tela_alunos.labelaluno.setText(f"{aluno[1]} {aluno[2]}")
             tela_alunos.labelcpf.setText(f"{aluno[3]}")
-            tela_alunos.labelturmacar.setText(f"{aluno[6]}")
-            tela_alunos.data_atual = datetime.date()
+            tela_alunos.labelturmacar.setText(f"{aluno[2]}")
+            tela_alunos.data_atual = date.today()
             #Adicionar notas do aluno na tabela.
             if notas != None:
                 tabela = tela_alunos.tabelaboletim
@@ -119,7 +119,7 @@ def mostrar_alunos_minha_turma():
     usuario = tela_login.inputnome.text()
     user = banco.buscar_usuario(usuario)
     aluno = banco.buscar_aluno_por_id(user[0])
-    turma = aluno[6]
+    turma = aluno[2]
     minha_turma = banco.buscar_alunos_mesma_turma(turma)
     tela_minha_turma.labelminhaturma.setText(f"{turma}")
     tabela = tela_minha_turma.tableturmas
@@ -127,18 +127,18 @@ def mostrar_alunos_minha_turma():
     row = 0
     for pu in minha_turma:
         tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{pu[1]}"))
-        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{pu[8]}"))
+        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{pu[5]}"))
         row += 1  
 
 def visualizar_dados_escolares():
     usuario = tela_login.inputnome.text()
     verificar_usuario = banco.buscar_usuario(usuario)
     aluno = banco.buscar_aluno_por_id(verificar_usuario[0])
-    if aluno[6] == "101":
+    if aluno[2] == "101":
         tela_dados_escolares_matutino.show()
-    elif aluno[6] == "102":
+    elif aluno[2] == "102":
         tela_dados_escolares_vespertino.show()
-    elif aluno[6] == "103":
+    elif aluno[2] == "103":
         tela_dados_escolares_noturno.show()
 
 def fechar_tela_dados_escolares_matutino():
@@ -234,10 +234,48 @@ def add_nota_para_aluno():
             elif def_nota == "Nota 3":
                 b = banco.buscar_nota_por_materia(prof[4], searched[5])
                 banco.inserir_notas_aluno(b[0],b[1], nota, prof[4], searched[5])
-            for x in searched:
-                tabela.setItem(total_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
-                tabela.setItem(total_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
-                tabela.setItem(total_row, 2, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+            b = banco.buscar_nota_por_materia(prof[4], searched[5])
+            tabela.setRowCount(len(searched))
+            for pu in searched:
+                tabela.setItem(total_row, 0, QtWidgets.QTableWidgetItem(f"{pu[0]}"))
+                tabela.setItem(total_row, 1, QtWidgets.QTableWidgetItem(f"{pu[1]}"))
+                tabela.setItem(total_row, 2, QtWidgets.QTableWidgetItem(f"{b[0]}"))
+                tabela.setItem(total_row, 3, QtWidgets.QTableWidgetItem(f"{b[1]}"))
+                tabela.setItem(total_row, 4, QtWidgets.QTableWidgetItem(f"{b[2]}"))
+                
+                total_row += 1  
+
+
+def editar_nota():
+    user = tela_login.inputnome.text()
+    aluno = tela_professores.inputbuscaraluno.text()
+    nota = tela_professores.inputaddnota.text()
+    turma = tela_professores.comboturmas.currentText()
+    user_i = banco.buscar_usuario(user)
+    prof = banco.buscar_professor_user_id(user_i[0])
+    tabela = tela_professores.tablealunosprof
+    def_nota = tela_professores.combonotas.currentText()
+    total_row = 0
+    if aluno == "" or nota == "" or turma == "":
+        tela_professores.label_erro.setText("ERRO! Campo(s) em branco.")
+    else:
+        searched = banco.buscar_aluno_por_nome_e_turma(aluno, turma)
+        if searched != None:
+            if def_nota == "Nota 1":
+                b = banco.buscar_nota_por_materia(prof[4], searched[5])
+                banco.editar_notas_aluno(nota, b[1], b[2], prof[4], searched[5])
+            elif def_nota == "Nota 2":
+                b = banco.buscar_nota_por_materia(prof[4], searched[5])
+                banco.editar_notas_aluno(b[0],nota, b[2], prof[4], searched[5])
+            elif def_nota == "Nota 3":
+                b = banco.buscar_nota_por_materia(prof[4], searched[5])
+                banco.editar_notas_aluno(b[0],b[1], nota, prof[4], searched[5])
+            b = banco.buscar_nota_por_materia(prof[4], searched[5])
+            tabela.setRowCount(len(searched)) + len(b)
+            for pu in searched:
+                tabela.setItem(total_row, 0, QtWidgets.QTableWidgetItem(f"{pu[0]}"))
+                tabela.setItem(total_row, 1, QtWidgets.QTableWidgetItem(f"{pu[2]}"))
+                tabela.setItem(total_row, 2, QtWidgets.QTableWidgetItem(f"{pu[3]}"))
                 
                 total_row += 1  
 
@@ -264,6 +302,7 @@ if __name__ == "__main__":
     tela_registro.btnvoltarcadastro.clicked.connect(voltar_tela_diretor)
 
     tela_professores.btnbuscaraluno.clicked.connect(buscar_aluno_tela_professor)
+    tela_professores.editarnota.clicked.connect(editar_nota)
     tela_professores.btnadicionaraluno.clicked.connect(add_nota_para_aluno)
 
     tela_alunos.btndadosescolares.clicked.connect(visualizar_dados_escolares)
