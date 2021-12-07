@@ -99,7 +99,7 @@ def buscar_faltas_por_user_id(usuario_id):
     banco = conectar()
     cursor = banco.cursor()
     cursor.execute(f"SELECT rowid, * FROM faltaalunos WHERE usuario_id={usuario_id}")
-    return cursor.fetchone()
+    return cursor.fetchall()
 
 def buscar_notas(usuario_id):
     criar_tabela_nota_aluno()
@@ -127,27 +127,27 @@ def buscar_professor_user_id(usuario_id):
     banco = conectar()
     cursor = banco.cursor()
     cursor.execute(f"SELECT rowid, * FROM professores WHERE usuario_id={usuario_id}")
-    return cursor.fetchall()
+    return cursor.fetchone()
 
 def buscar_professor_por_cpf(cpf):
     criar_tabela_professores()
     banco = conectar()
     cursor = banco.cursor()
     cursor.execute(f"SELECT rowid, * FROM professores WHERE cpf={cpf}")
-    return cursor.fetchall()
+    return cursor.fetchone()
 
 def buscar_aluno_por_cpf(cpf):
     criar_tabela_alunos()
     banco = conectar()
     cursor = banco.cursor()
     cursor.execute(f"SELECT rowid, * FROM alunos WHERE cpf={cpf}")
-    return cursor.fetchall()
+    return cursor.fetchone()
 
 def buscar_aluno_por_nome_e_turma(nome,turma):
     criar_tabela_alunos()
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute(f"SELECT rowid,* FROM alunos WHERE nome='{nome}' AND turma='{turma}'")
+    cursor.execute(f"SELECT * FROM alunos WHERE nome='{nome}' AND turma='{turma}'")
     return cursor.fetchall()
 
 def buscar_toda_turma(turma):
