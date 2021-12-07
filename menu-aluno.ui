@@ -265,7 +265,7 @@ background-color: rgb(255, 255, 255);
 </string>
       </property>
       <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>128</number>
+       <number>157</number>
       </attribute>
       <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
@@ -273,11 +273,6 @@ background-color: rgb(255, 255, 255);
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
-      <column>
-       <property name="text">
-        <string>Materia</string>
-       </property>
-      </column>
       <column>
        <property name="text">
         <string>1 Trimestre</string>
@@ -295,7 +290,7 @@ background-color: rgb(255, 255, 255);
       </column>
       <column>
        <property name="text">
-        <string>Faltas</string>
+        <string>Materia</string>
        </property>
       </column>
      </widget>
