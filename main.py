@@ -1,4 +1,5 @@
 from datetime import datetime
+from sqlite3.dbapi2 import Row
 import sys, banco
 from PyQt5 import uic, QtWidgets
 from datetime import date
@@ -174,13 +175,21 @@ def buscar_aluno_tela_professor():
     prof = banco.buscar_professor_user_id(user_i[0])
     quant_row = 0
     if turma == '':
-        tela_professores.label_erro.setText("Campo turma obrigatorio.")
+        info_aluno = banco.buscar_todos_alunos_com_nota()
+        tabela.setRowCount(len(info_aluno))
+        for x in info_aluno:
+            tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[1]}"))
+            tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+            tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{x[3]}"))
+            tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{x[4]}"))
+            tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{x[5]}"))
+            quant_row += 1
     else:
         tela_professores.label_erro.setText("")
         info_aluno = banco.buscar_aluno_por_nome_e_turma(nome, turma)
         if info_aluno == [] and nome == '':
             search_all = banco.buscar_toda_turma(turma)
-            search_notas = banco.buscar_todas_notas_por_materia(prof[4])
+            search_notas = banco.buscar_todas_notas_por_materia(prof[4], turma)
             tabela.setRowCount(len(search_all))                
             if search_notas == []:
                 for x in search_all:
