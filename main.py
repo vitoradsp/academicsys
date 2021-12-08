@@ -412,6 +412,7 @@ def adicionar_falta_para_aluno():
             else:
                 banco.inserir_falta_para_aluno(1,pesq_aluno[0][5])
                 tela_professores.label_erro.setText("Falta Inserida.")
+
 def voltar_tela_prof():
     tela_professores.close()
     tela_login.show()
