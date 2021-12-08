@@ -33,7 +33,7 @@
      <enum>QTabWidget::North</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <property name="usesScrollButtons">
      <bool>true</bool>
@@ -264,9 +264,6 @@ background-color: rgb(255, 176, 17)
 background-color: rgb(255, 255, 255);
 </string>
       </property>
-      <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>157</number>
       </attribute>
@@ -275,9 +272,6 @@ background-color: rgb(255, 255, 255);
       </attribute>
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderHighlightSections">
-       <bool>true</bool>
       </attribute>
       <column>
        <property name="text">

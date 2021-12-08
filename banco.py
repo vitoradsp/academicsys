@@ -164,6 +164,13 @@ def buscar_alunos_mesma_turma(turma):
     cursor.execute(f"SELECT * FROM alunos WHERE turma='{turma}'")
     return cursor.fetchall()
 
+def buscar_notas_por_materia(materia):
+    criar_tabela_alunos()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"SELECT rowid,* FROM notasaluno WHERE materia='{materia}'")
+    return cursor.fetchall()
+
 def buscar_todos_alunos_com_nota():
     criar_tabela_nota_aluno()
     criar_tabela_alunos()

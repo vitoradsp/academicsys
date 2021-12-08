@@ -41,8 +41,8 @@ def logar():
                 elif faltas == ["350"]: # 50 dias * 7 materias.
                     tela_alunos.labelaprovadoreprovado.setText("Reprovado por falta.")
                 tela_alunos.labelaluno.setText(f"{aluno[1]}")
-                tela_alunos.labelcpf.setText(f"{aluno[3]}")
                 tela_alunos.labelturmacar.setText(f"{aluno[2]}")
+                tela_alunos.labelcpf.setText(f"{aluno[3]}")
                 tela_alunos.data_atual.setText(str(date.today()))
                 #Adicionar notas do aluno na tabela.
                 if notas == []:
@@ -52,12 +52,23 @@ def logar():
                     tabela = tela_alunos.tabelaboletim
                     tabela.setRowCount(7)
                     row = 0
+                    soma = 0
                     for p in notas:
                         tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{p[1]}"))
                         tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{p[2]}"))
                         tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{p[3]}"))
                         tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{p[4]}"))
                         row += 1
+                    for p in notas:
+                        soma = float(p[1]) + float(p[2]) + float(p[3])
+                        tot_soma = soma
+                        row += 1
+                        if row == 2:
+                            tot_soma = tot_soma / 3
+                            if tot_soma < 7.0:
+                                tela_alunos.labelaprovadoreprovado.setText("Reprovado")
+                        if row == 5:
+                            break
                     tela_alunos.show()
                     tela_login.close()
         elif verificar_usuario[3] == "Professor":
@@ -204,24 +215,12 @@ def buscar_aluno_tela_professor():
     else:
         tela_professores.label_erro.setText("")
         info_aluno = banco.buscar_aluno_por_nome_e_turma(nome, turma)
-        if info_aluno == [] and nome == '' and turma != '':
-            search_notas_all = banco.buscar_notas_da_materia()
-            tabela.setRowCount(len(search_notas_all))                
-            if search_notas_all == []:
-                tela_professores.label_erro.setText("Nenhuma nota lancada no sistema.")
-            else:
-                for x in search_notas_all:
-                    tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[1]}"))
-                    tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
-                    tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{x[3]}"))
-                    tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{x[4]}"))
-                    tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{x[5]}"))
-                    tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{x[6]}"))
-                    quant_row += 1
+        if nome == '':
+            tela_professores.label_erro.setText("Nenhum aluno provido.")
+        elif info_aluno == [] or nome == '' or turma != '':
+            tela_professores.label_erro.setText("Campo(s) em branco.")
         elif info_aluno == [] and nome == '' and turma == '':
             tela_professores.label_erro.setText("Erro na pesquisa, nenhuma informacao provida.")
-        elif nome == '':
-            tela_professores.label.erro.setText("Nenhum aluno provido.")
         else:
             if info_aluno == []:
                 tela_professores.label_erro.setText("Nenhum aluno encontrado")
@@ -236,7 +235,7 @@ def buscar_aluno_tela_professor():
                         tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"0"))
                         tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"0"))
                         tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"0"))
-                        tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"Todas"))
+                        tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{prof[4]}"))
                         quant_row += 1
                 else:
                     for x in info_aluno:
@@ -260,7 +259,7 @@ def add_nota_para_aluno():
     row = 0
     if aluno == "" or nota == "" or turma == "":
         tela_professores.label_erro.setText("ERRO! Campo(s) em branco.")
-    elif int(nota) > 10:
+    elif float(nota) > 10:
         tela_professores.label_erro.setText("ERRO! Nota invalida.")
     else:
         searched = banco.buscar_aluno_por_nome_e_turma(aluno, turma)
@@ -293,7 +292,9 @@ def add_nota_para_aluno():
             elif def_nota == "Nota 2":
                 tela_professores.label_erro.clear()
                 nota_materia = banco.buscar_nota_por_materia(prof[4], searched[0][5])
-                banco.editar_notas_aluno(nota_materia[0][1], str(nota), '0', prof[4], searched[0][5])
+                if nota_materia[0][2] != "0":
+                    tela_professores.label_erro.setText("Nota nao adicionada, aluno ja possui nota no segundo trimestre.")                
+                banco.editar_notas_aluno(nota_materia[0][1], str(nota),'0', prof[4], searched[0][5])
                 nota_materia = banco.buscar_nota_por_materia(prof[4], searched[0][5])
                 for x in searched:
                     tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
@@ -303,8 +304,11 @@ def add_nota_para_aluno():
                     tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[0][3]}"))
                     tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{nota_materia[0][4]}"))
             elif def_nota == "Nota 3":
+                tela_professores.label_erro.clear()
                 nota_materia = banco.buscar_nota_por_materia(prof[4], searched[0][5])
-                banco.editar_notas_aluno(nota_materia[0][1],nota_materia[1], str(nota), prof[4], searched[0][5])
+                if nota_materia[0][3] != "0":
+                    tela_professores.label_erro.setText("Nota nao adicionada, aluno ja possui nota no terceiro trimestre.")
+                banco.editar_notas_aluno(nota_materia[0][1], nota_materia[0][2], str(nota), prof[4], searched[0][5])
                 nota_materia = banco.buscar_nota_por_materia(prof[4], searched[0][5])
                 for x in searched:
                     tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))

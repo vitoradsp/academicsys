@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(218, 218, 218);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -337,10 +337,10 @@ background-color: rgb(255, 255, 255);
 </string>
       </property>
       <property name="inputMask">
-       <string>00,00</string>
+       <string>00.00</string>
       </property>
       <property name="text">
-       <string>,</string>
+       <string>.</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnadicionaraluno">
