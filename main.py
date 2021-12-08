@@ -125,7 +125,7 @@ def registrar_aluno():
         tela_registro.erro.setText("Usuario necessita ter mais que 7 caracteres.")
     elif ano == "2021" or ano == "2020":
         tela_registro.erro.setText("Data invalida.")
-    elif name_check == False:
+    elif name_check == True:
         tela_registro.erro.setText("Nome Invalido.")
     else:
         verificar_cpf = banco.buscar_aluno_por_cpf(cpf)
