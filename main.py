@@ -61,7 +61,7 @@ def logar():
                         tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{p[4]}"))
                         row += 1
                     for p in notas:
-                        soma = float(p[1]) + float(p[2]) + float(p[3])
+                        soma = int(p[1]) + int(p[2]) + int(p[3])
                         tot_soma = soma
                         row += 1
                         if row == 2:
@@ -250,12 +250,15 @@ def add_nota_para_aluno():
     turma = tela_professores.comboturmas.currentText()
     user_i = banco.buscar_usuario(user)
     prof = banco.buscar_professor_user_id(user_i[0])
+    ven_alun = banco.buscar_aluno_por_nome_e_turma(aluno, turma)
     tabela = tela_professores.tablealunosprof
     def_nota = tela_professores.combonotas.currentText()
     row = 0
     if aluno == "" or nota == "" or turma == "":
         tela_professores.label_erro.setText("ERRO! Campo(s) em branco.")
-    elif float(nota) > 10:
+    elif ven_alun is None:
+        tela_professores.label_erro.setText("Nenhum Aluno encontrado.")
+    elif int(nota) > 10:
         tela_professores.label_erro.setText("ERRO! Nota invalida.")
     else:
         searched = banco.buscar_aluno_por_nome_e_turma(aluno, turma)
@@ -332,8 +335,8 @@ def editar_nota():
         tela_professores.label_erro.setText("ERRO! Campo(s) em branco.")
     else:
         searched = banco.buscar_aluno_por_nome_e_turma(aluno, turma)
-        nota_materia = banco.buscar_nota_por_materia(prof[4], searched[0][5])
         if searched != None:
+            nota_materia = banco.buscar_nota_por_materia(prof[4], searched[0][5])
             if def_nota == "Nota 1":
                 b = banco.buscar_nota_por_materia(prof[4], searched[0][5])
                 banco.editar_notas_aluno(nota, b[1], b[2], prof[4], searched[0][5])

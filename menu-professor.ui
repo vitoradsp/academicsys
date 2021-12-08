@@ -337,10 +337,10 @@ background-color: rgb(255, 255, 255);
 </string>
       </property>
       <property name="inputMask">
-       <string>00.00</string>
+       <string>00</string>
       </property>
       <property name="text">
-       <string>.</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="btnadicionaraluno">
