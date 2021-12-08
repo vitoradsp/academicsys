@@ -383,7 +383,7 @@ border-radius:10px
 </string>
       </property>
       <property name="text">
-       <string>Voltar</string>
+       <string>Logout</string>
       </property>
      </widget>
      <widget class="QComboBox" name="dia">
@@ -1046,7 +1046,7 @@ border-radius:10px
 </string>
       </property>
       <property name="text">
-       <string>Voltar</string>
+       <string>Logout</string>
       </property>
      </widget>
     </widget>
@@ -1071,7 +1071,7 @@ border-radius:10px
 </string>
       </property>
       <property name="text">
-       <string>Voltar</string>
+       <string>Logout</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">

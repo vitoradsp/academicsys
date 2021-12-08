@@ -105,36 +105,11 @@ background-color: rgb(255, 2, 69);
        <string>Logout</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnchamada">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>200</y>
-        <width>121</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Yu Gothic Medium</family>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border: 1px solid black;
-border-radius: 10px;
-background-color: rgb(255, 176, 17)
-</string>
-      </property>
-      <property name="text">
-       <string>Chamada</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="btninformacoes">
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>260</y>
+        <y>200</y>
         <width>121</width>
         <height>41</height>
        </rect>
@@ -231,7 +206,6 @@ color: rgb(255, 255, 255);</string>
      <zorder>titulobemvindo</zorder>
      <zorder>btnminhaturmaprof</zorder>
      <zorder>btnlogout</zorder>
-     <zorder>btnchamada</zorder>
      <zorder>btninformacoes</zorder>
      <zorder>label</zorder>
      <zorder>labelnomebemvindo</zorder>
@@ -363,10 +337,10 @@ background-color: rgb(255, 255, 255);
 </string>
       </property>
       <property name="inputMask">
-       <string/>
+       <string>00,00</string>
       </property>
       <property name="text">
-       <string/>
+       <string>,</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnadicionaraluno">
@@ -619,6 +593,25 @@ border-radius: 10px
       </property>
       <property name="text">
        <string>Editar Nota</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnfalta">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>200</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid black;
+background-color: rgb(255, 0, 0);
+border-radius: 10px
+</string>
+      </property>
+      <property name="text">
+       <string>Adicionar Falta</string>
       </property>
      </widget>
     </widget>

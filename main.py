@@ -35,6 +35,11 @@ def logar():
                 tela_login.erro.setText("Sua conta foi deletada, favor contatar secretaria.")
             else:
                 notas = banco.buscar_notas(aluno[6])
+                faltas = banco.buscar_faltas_por_user_id(aluno[6])
+                if faltas == []:
+                    tela_alunos.labelaprovadoreprovado.setText("")
+                elif faltas == ["350"]: # 50 dias * 7 materias.
+                    tela_alunos.labelaprovadoreprovado.setText("Reprovado por falta.")
                 tela_alunos.labelaluno.setText(f"{aluno[1]}")
                 tela_alunos.labelcpf.setText(f"{aluno[3]}")
                 tela_alunos.labelturmacar.setText(f"{aluno[2]}")
@@ -60,13 +65,14 @@ def logar():
             tela_login.close()
 
 def registrar_professor():
-    nome = tela_registro.inputnomeprofessor.text()
+    nome = str(tela_registro.inputnomeprofessor.text())
     cpf = tela_registro.inputcpfprofessor.text()
     materia = tela_registro.inputmateria.currentText()
     senha = tela_registro.inputsenhaprofessor.text()
     csenha = tela_registro.inputcsenhaprofessor.text()
     usuario = tela_registro.inputusuarioprofessor.text()
     turma = []
+    check_name = nome.isalpha()
     #Turmas do professor, professor pode dar aula para mais de uma turma.
     if tela_registro.t101.isChecked() == True:
         turma.append("101")
@@ -76,10 +82,12 @@ def registrar_professor():
         turma.append("103")
     if nome == "" or cpf == '' or senha == '' or csenha == '' or usuario == '' or turma == [] or materia == "":
         tela_registro.aviso.setText("Campo(s) em branco.")
+    elif check_name == False:
+        tela_registro.aviso.setText("Nome invalido.")
+    elif len(senha) < 6:
+        tela_registro.aviso.setText("Senha necessita possuir mais do que 6 caracteres.")
     elif csenha != senha:
         tela_registro.aviso.setText("Senhas nao correspondem.")
-    elif len(senha) < 6:
-        tela_registro.aviso.setText("Senha ")
     else:
         verificar_user = banco.buscar_professor_por_cpf(cpf)
         verificar_existencia_usuario = banco.buscar_usuario(usuario)
@@ -381,6 +389,26 @@ def voltar_tela_minhas_turmas_prof():
     tela_minhas_turmas_professor.close()
     tela_professores.show()
 
+def adicionar_falta_para_aluno():
+    aluno = tela_professores.inputbuscaraluno.text()
+    turma = tela_professores.comboturmas.currentText()
+    if aluno == '' or turma == '':
+        tela_professores.label_erro.setText("Campo(s) invalido(s).")
+    else:
+        tela_professores.label_erro.setText("")
+        ven_alun = banco.buscar_aluno_por_nome_e_turma(aluno,turma)
+        if ven_alun == []:
+            tela_professores.label_erro.setText("Nenhum aluno encontrado.")
+        else:
+            pesq_aluno = banco.buscar_aluno_por_nome_e_turma(aluno,turma)
+            falt = banco.buscar_faltas_por_user_id(pesq_aluno[5])
+            banco.inserir_falta_para_aluno((falt + 1))
+            tela_professores.label_erro.setText("Falta Inserida.")
+
+def voltar_tela_prof():
+    tela_professores.close()
+    tela_login.show()
+
 if __name__ == "__main__":
     qt = QtWidgets.QApplication(sys.argv)
     #Telas
@@ -402,6 +430,7 @@ if __name__ == "__main__":
     tela_registro.cadastrarprofessor.clicked.connect(registrar_professor)
     tela_registro.cadastraraluno.clicked.connect(registrar_aluno)
     tela_registro.btnvoltarcadastro2.clicked.connect(voltar_tela_diretor)
+    tela_registro.btnvoltarcadastro_3.clicked.connect(voltar_tela_diretor)
     tela_registro.btnvoltarcadastro.clicked.connect(voltar_tela_diretor)
     tela_registro.btnremover.clicked.connect(remover)
 
@@ -410,6 +439,8 @@ if __name__ == "__main__":
     tela_professores.btnadicionaraluno.clicked.connect(add_nota_para_aluno)
     tela_professores.btninformacoes.clicked.connect(mostrar_tela_informacoes)
     tela_professores.btnminhaturmaprof.clicked.connect(mostrar_minhas_turmas_professor)
+    tela_professores.btnfalta.clicked.connect(adicionar_falta_para_aluno)
+    tela_professores.btnlogout.clicked.connect(voltar_tela_prof)
     
     tela_alunos.btndadosescolares.clicked.connect(visualizar_dados_escolares)
     tela_alunos.btnminhaturma.clicked.connect(mostrar_alunos_minha_turma)
