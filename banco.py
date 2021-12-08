@@ -71,6 +71,14 @@ def inserir_falta_para_aluno(falta, usuario_id):
     banco.commit()
     banco.close()
 
+def editar_falta_aluno(faltas, usuario_id):
+    criar_tabela_falta_alunos()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"UPDATE faltaalunos SET faltas={faltas} WHERE usuario_id={usuario_id}")
+    banco.commit()
+    banco.close()
+
 def inserir_professor(nome, cpf, turma, materia, usuario_id):
     criar_tabela_professores()
     banco = conectar()
@@ -198,7 +206,7 @@ def deletar_professor_por_cpf(cpf):
     criar_tabela_usuario()
     banco = conectar()
     cursor = banco.cursor()
-    cursor.execute(f"DELETE FROM professor WHERE cpf={cpf}")
+    cursor.execute(f"DELETE FROM professor WHERE cpf='{cpf}'")
     banco.commit()
     banco.close()   
 

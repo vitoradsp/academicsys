@@ -89,9 +89,7 @@
      </font>
     </property>
     <property name="text">
-     <string> 101 matutino 
- 102 vespertino 
- 103 tarde</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="btnvoltarprof">
