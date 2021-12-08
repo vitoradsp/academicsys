@@ -115,13 +115,6 @@ def buscar_nota_por_materia(materia, usuario_id):
     cursor.execute(f"SELECT rowid,* FROM notasaluno WHERE materia='{materia}' AND usuario_id={usuario_id}")
     return cursor.fetchall()
 
-def buscar_todas_notas_por_materia(materia, turma):
-    criar_tabela_nota_aluno()
-    banco = conectar()
-    cursor = banco.cursor()
-    cursor.execute(f"SELECT rowid,* FROM notasaluno WHERE materia='{materia} and turma='{turma}'")
-    return cursor.fetchall()
-
 def buscar_professor_user_id(usuario_id):
     criar_tabela_professores()
     banco = conectar()
@@ -171,43 +164,36 @@ def buscar_alunos_mesma_turma(turma):
     cursor.execute(f"SELECT * FROM alunos WHERE turma='{turma}'")
     return cursor.fetchall()
 
-def alterar_usuario(nome, senha, cargo):
-    criar_tabela_usuario()
-    banco = conectar()
-    cursor = banco.cursor()
-    cursor.execute(f"UPDATE usuarios SET nome='{nome}', senha='{senha}', adm={cargo} WHERE rowid={id}")
-    banco.commit()
-    banco.close()
-
-def deletar_notas_materia(materia):
-    criar_tabela_alunos()
-    banco = conectar()
-    cursor = banco.cursor()
-    cursor.execute(f"DELETE FROM notasaluno WHERE materia='{materia}'")
-    return cursor.fetchone()
-
-def deletar_usuario(usuario):
-    criar_tabela_usuario()
-    banco = conectar()
-    cursor = banco.cursor()
-    cursor.execute(f"DELETE FROM produtos WHERE usuario='{usuario}'")
-    banco.commit()
-    banco.close()
-
-'''def buscar_todos_alunos_com_nota():
-    criar_tabela_nota_aluno()
-    banco = conectar()
-    cursor = banco.cursor()
-    cursor.execute(f"SELECT f.rowid, u.usuario, f.nome, f.funcao, f.matricula FROM funcionarios f JOIN alunos u ON a.rowid = f.usuario_id")
-    return cursor.fetchall()'''
-
 def buscar_todos_alunos_com_nota():
     criar_tabela_nota_aluno()
+    criar_tabela_alunos()
     banco = conectar()
     cursor = banco.cursor()
     cursor.execute(f"SELECT a.rowid, a.nome, a.turma, n.nota1, n.nota2, n.nota3, n.materia FROM notasaluno n JOIN alunos a ON a.usuario_id = n.usuario_id")
     return cursor.fetchall()
 
+def buscar_notas_da_materia():
+    criar_tabela_nota_aluno()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"SELECT a.rowid, a.nome, a.turma, n.nota1, n.nota2, n.nota3, n.materia FROM notasaluno n JOIN alunos a ON a.usuario_id = n.usuario_id JOIN professores p on p.materia = n.materia")
+    return cursor.fetchall()
+
+def deletar_aluno_por_cpf(cpf):
+    criar_tabela_usuario()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"DELETE FROM alunos WHERE cpf={cpf}")
+    banco.commit()
+    banco.close()
+
+def deletar_professor_por_cpf(cpf):
+    criar_tabela_usuario()
+    banco = conectar()
+    cursor = banco.cursor()
+    cursor.execute(f"DELETE FROM professor WHERE cpf={cpf}")
+    banco.commit()
+    banco.close()   
 
 
 
