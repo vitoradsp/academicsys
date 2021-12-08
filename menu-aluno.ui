@@ -33,7 +33,7 @@
      <enum>QTabWidget::North</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="usesScrollButtons">
      <bool>true</bool>
@@ -201,7 +201,7 @@ background-color: rgb(255, 176, 17)
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>vitorlivros.png</pixmap>
+       <pixmap>livros.png</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="label_5">

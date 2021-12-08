@@ -76,14 +76,13 @@ def logar():
             tela_login.close()
 
 def registrar_professor():
-    nome = str(tela_registro.inputnomeprofessor.text())
+    nome = tela_registro.inputnomeprofessor.text()
     cpf = tela_registro.inputcpfprofessor.text()
     materia = tela_registro.inputmateria.currentText()
     senha = tela_registro.inputsenhaprofessor.text()
     csenha = tela_registro.inputcsenhaprofessor.text()
     usuario = tela_registro.inputusuarioprofessor.text()
     turma = []
-    check_name = nome.isalpha()
     #Turmas do professor, professor pode dar aula para mais de uma turma.
     if tela_registro.t101.isChecked() == True:
         turma.append("101")
@@ -93,7 +92,7 @@ def registrar_professor():
         turma.append("103")
     if nome == "" or cpf == '' or senha == '' or csenha == '' or usuario == '' or turma == [] or materia == "":
         tela_registro.aviso.setText("Campo(s) em branco.")
-    elif check_name == False:
+    elif int(len(nome)) < 3:
         tela_registro.aviso.setText("Nome invalido.")
     elif len(senha) < 6:
         tela_registro.aviso.setText("Senha necessita possuir mais do que 6 caracteres.")
@@ -114,7 +113,7 @@ def registrar_professor():
             tela_registro.aviso.setText("Sucesso no registro.")
 
 def registrar_aluno():
-    nome = str(tela_registro.inputnomealuno.text())
+    nome = tela_registro.inputnomealuno.text()
     cpf = tela_registro.inputcpfaluno.text()
     senha = tela_registro.inputsenhaaluno.text()
     csenha = tela_registro.inputcsenhaaluno.text()
@@ -125,7 +124,6 @@ def registrar_aluno():
     mes = tela_registro.mes.currentText()
     ano = tela_registro.ano.currentText()
     data_de_nascimento = str(f"{dia}/{mes}/{ano}") 
-    name_check = nome.isalpha()
     if nome == "" or cpf == '' or senha == '' or csenha == '' or usuario == '' or turma == '' or curso == '' or ano == "":
         tela_registro.erro.setText("Campo(s) em branco.")
     elif csenha != senha:
@@ -136,7 +134,7 @@ def registrar_aluno():
         tela_registro.erro.setText("Usuario necessita ter mais que 7 caracteres.")
     elif ano == "2021" or ano == "2020":
         tela_registro.erro.setText("Data invalida.")
-    elif name_check == True:
+    elif int(len(nome)) < 3:
         tela_registro.erro.setText("Nome Invalido.")
     else:
         verificar_cpf = banco.buscar_aluno_por_cpf(cpf)
