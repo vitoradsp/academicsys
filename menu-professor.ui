@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>842</width>
-    <height>585</height>
+    <height>586</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,6 +25,11 @@
       <width>841</width>
       <height>611</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(218, 218, 218);</string>
@@ -383,7 +388,7 @@ border-radius: 10px
        <rect>
         <x>154</x>
         <y>199</y>
-        <width>101</width>
+        <width>91</width>
         <height>31</height>
        </rect>
       </property>
@@ -398,7 +403,7 @@ background-color: rgb(255, 255, 255);</string>
       </property>
       <item>
        <property name="text">
-        <string/>
+        <string>Todas</string>
        </property>
       </item>
       <item>
@@ -420,15 +425,15 @@ background-color: rgb(255, 255, 255);</string>
      <widget class="QLabel" name="labelturmasprof">
       <property name="geometry">
        <rect>
-        <x>69</x>
-        <y>199</y>
-        <width>81</width>
+        <x>56</x>
+        <y>198</y>
+        <width>91</width>
         <height>29</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>18</pointsize>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -439,7 +444,7 @@ background-color: rgb(255, 255, 255);</string>
 </string>
       </property>
       <property name="text">
-       <string>Turma:</string>
+       <string>Turma(s):</string>
       </property>
      </widget>
      <widget class="QLabel" name="labelalunoerro">

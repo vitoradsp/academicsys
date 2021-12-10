@@ -34,54 +34,93 @@ def logar():
             elif aluno[6] == True:
                 tela_login.erro.setText("Sua conta esta atualmente desativada, favor contatar secretaria para reativar.")
             else:
-                notas = banco.buscar_notas(aluno[8])
                 tela_alunos.labelnomebemvindo.setText(f"{aluno[1]}")
+                biologia= banco.buscar_nota_por_materia_biologia(aluno[8])
+                filosofia = banco.buscar_nota_por_materia_filosofia(aluno[8])
+                fisica = banco.buscar_nota_por_materia_fisica(aluno[8])
+                geografia = banco.buscar_nota_por_materia_geografia(aluno[8])
+                historia = banco.buscar_nota_por_materia_historia(aluno[8])
+                matematica = banco.buscar_nota_por_materia_matematica(aluno[8])
+                portugues = banco.buscar_nota_por_materia_portugues(aluno[8])        
                 if aluno[4] == 350: # 50 dias * 7 materias.
                     tela_alunos.labelaprovadoreprovado.setText("RPF.")
-                tela_alunos.labelaluno.setText(f"{aluno[1]}")
-                tela_alunos.labelturmacar.setText(f"{aluno[2]}")
-                tela_alunos.labelcpf.setText(f"{aluno[3]}")
-                tela_alunos.data_atual.setText(str(date.today()))
+                    tela_alunos.labelaluno.setText(f"{aluno[1]}")
+                    tela_alunos.labelturmacar.setText(f"{aluno[2]}")
+                    tela_alunos.labelcpf.setText(f"{aluno[3]}")
+                    tela_alunos.data_atual.setText(str(date.today()))
                 #Adicionar notas do aluno na tabela.
-                if notas == []:
-                    tela_alunos.show()
-                    tela_login.close()
                 else:
+                    tela_alunos.labelaluno.setText(f"{aluno[1]}")
+                    tela_alunos.labelturmacar.setText(f"{aluno[2]}")
+                    tela_alunos.labelcpf.setText(f"{aluno[3]}")
+                    tela_alunos.data_atual.setText(str(date.today()))
                     tabela = tela_alunos.tabelaboletim
                     tabela.setRowCount(7)
                     row = 0
                     count_failure = 0
                     count_sucess = 0
                     count = 0
-                    for x in notas:
-                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{x[1]}"))
-                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
-                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{x[3]}"))
-                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{x[4]}"))
-                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{aluno[4]}"))
-                        count += 1
-                        if x[1] != '' and x[2] != '' and x[3] != '' and count == 7:
-                            soma = int(x[1]) + int(x[2]) + int(x[3])
-                            tot_soma = soma
-                            tot_soma = tot_soma / 3
-                            if tot_soma < 7.0:
-                                count_failure += 1
-                            else:
-                                count_sucess += 1
-                            if count_failure > 1:
-                                tela_alunos.labelaprovadoreprovado.setText("Reprovado")
-                                tela_login.close()
-                                tela_alunos.show()
-                            else:
-                                tela_alunos.labelaprovadoreprovado.setText("Aprovado")
-                                tela_login.close()
-                                tela_alunos.show()
+                    search_notas = verificar_materia_notas_alunos_boletim(verificar_usuario[0])
+                    if biologia != None:
+                        inserir_tabela_boletim(biologia,"Biologia",aluno[4], 1)
+                    if geografia != None:
+                        inserir_tabela_boletim(geografia,"Geografia",aluno[4], 2)
+                    if fisica != None:
+                        inserir_tabela_boletim(fisica,"Fisica",aluno[4], 3)
+                    if filosofia != None:
+                        inserir_tabela_boletim(filosofia,"Filosofia",aluno[4], 4)
+                    if matematica != None:
+                        inserir_tabela_boletim(matematica,"Matematica",aluno[4], 5)
+                    if portugues != None:
+                        inserir_tabela_boletim(portugues,"Portugues",aluno[4], 6)
+                    if historia != None:
+                        inserir_tabela_boletim(historia,"Historia",aluno[4], 7)
+                    if search_notas != []:
+                        if biologia != None and filosofia != None and fisica != None and geografia != None and historia != None and matematica != None and portugues!= None:
+                            if biologia[3] != '' and filosofia[3] != '' and fisica[3] != '' and geografia[3] != '' and historia[3] != '' and matematica[3] != '' and portugues[3] != '':
+                                soma = somar_materia(biologia[1],biologia[2],biologia[3])
+                                soma = somar_materia(filosofia[1],filosofia[2],filosofia[3])
+                                soma = somar_materia(fisica[1],fisica[2],fisica[3])
+                                soma = somar_materia(geografia[1],geografia[2],geografia[3])
+                                soma = somar_materia(historia[1],historia[2],historia[3])
+                                soma = somar_materia(matematica[1],matematica[2],matematica[3])
+                                soma = somar_materia(portugues[1],portugues[2],portugues[3])
+                                tot_soma = soma
+                                if tot_soma < 7.0:
+                                    count_failure += 1
+                                else:
+                                    count_sucess += 1
+                                if count_failure > 1:
+                                    tela_alunos.labelaprovadoreprovado.setText("Reprovado")
+                                    tela_login.close()
+                                    tela_alunos.show()
+                                else:
+                                    tela_alunos.labelaprovadoreprovado.setText("Aprovado")
+                                    tela_login.close()
+                                    tela_alunos.show()
                         else:
                             tela_login.close()
                             tela_alunos.show()
+                    else:
+                        tela_login.close()
+                        tela_alunos.show()
         elif verificar_usuario[3] == "Professor":
             tela_professores.show()
             tela_login.close()
+
+def somar_materia(x, x1, x2):
+    soma = (int(x) + int(x1) + int(x2))
+    tot_soma = soma / 3
+    return tot_soma
+
+def inserir_no_banco_todas_notas(nota1, nota2, nota3, turma, usuario_id):
+    banco.inserir_notas_aluno_biologia(nota1, nota2, nota3, turma, usuario_id)
+    banco.inserir_notas_aluno_geografia(nota1, nota2, nota3, turma, usuario_id)
+    banco.inserir_notas_aluno_filosofia(nota1, nota2, nota3, turma, usuario_id)
+    banco.inserir_notas_aluno_fisica(nota1, nota2, nota3, turma, usuario_id)
+    banco.inserir_notas_aluno_historia(nota1, nota2, nota3, turma, usuario_id)
+    banco.inserir_notas_aluno_matematica(nota1, nota2, nota3, turma, usuario_id)
+    banco.inserir_notas_aluno_portugues(nota1, nota2, nota3, turma, usuario_id)
 
 def registrar_professor():
     nome = tela_registro.inputnomeprofessor.text()
@@ -120,6 +159,17 @@ def registrar_professor():
             verificar_existencia_usuario = banco.buscar_usuario(usuario)
             banco.inserir_professor(nome,cpf,turma, materia, False, verificar_existencia_usuario[0])        
             tela_registro.aviso.setText("Sucesso no registro.")
+
+def inserir_tabela_boletim(materia, nome, falta, row):
+    row += 1
+    tabela = tela_alunos.tabelaboletim
+    tabela.setRowCount(7)
+    if materia != None:
+        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{materia[1]}"))
+        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{materia[2]}"))
+        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{materia[3]}"))
+        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nome}"))
+        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{falta}"))
 
 def registrar_aluno():
     nome = tela_registro.inputnomealuno.text()
@@ -161,14 +211,14 @@ def registrar_aluno():
                 banco.inserir_usuario(usuario,senha, "Aluno", False)
                 verificar_usuario = banco.buscar_usuario(usuario)
                 banco.inserir_aluno(nome, turma, cpf, 0, curso, data_de_nascimento, False, verificar_usuario[0])            
+                inserir_no_banco_todas_notas('','','',turma, verificar_usuario[0])
                 tela_registro.erro.setText("Sucesso no registro.")
             else:
                 banco.inserir_usuario(usuario, senha, "Aluno", False)
                 verificar_usuario = banco.buscar_usuario(usuario)
                 banco.inserir_aluno(nome, turma, cpf, 0, curso, data_de_nascimento, False, verificar_usuario[0])            
+                inserir_no_banco_todas_notas('','','',turma, verificar_usuario[0])
                 tela_registro.erro.setText("Sucesso no registro.")
-
-
 
 def mostrar_alunos_minha_turma():
     tela_minha_turma.show()
@@ -220,6 +270,23 @@ def voltar_tela_diretor():
     tela_registro.close()
     tela_login.show()
 
+def verificar_materia_com_nota(materia):
+    if materia == "Biologia":
+        nota = banco.buscar_todos_alunos_com_nota_biologia()
+    elif materia == "Matematica":
+        nota = banco.buscar_todos_alunos_com_nota_matematica()
+    elif materia == "Portugues":
+        nota = banco.buscar_todos_alunos_com_nota_portugues()
+    elif materia == "Fisica":
+        nota = banco.buscar_todos_alunos_com_nota_fisica()
+    elif materia == "Historia":
+        nota = banco.buscar_todos_alunos_com_nota_historia()
+    elif materia == "Geografia":
+        nota = banco.buscar_todos_alunos_com_nota_geografia()
+    elif materia == "Filosofia":
+        nota = banco.buscar_todos_alunos_com_nota_filosofia()
+    return nota
+
 def buscar_aluno_tela_professor():
     user = tela_login.inputnome.text()
     nome = tela_professores.inputbuscaraluno.text()
@@ -228,65 +295,93 @@ def buscar_aluno_tela_professor():
     user_i = banco.buscar_usuario(user)
     prof = banco.buscar_professor_user_id(user_i[0])
     quant_row = 0
-    if turma != '' and nome == '' and prof != None:
-        alunos = banco.buscar_alunos_mesma_turma(turma)
-        notas = banco.buscar_notas_da_materia_por_turma(prof[4], turma)
-        tabela.setRowCount(len(alunos))
-        if alunos == []:
-            tela_professores.label_erro.setText(f"Nao foi possivel buscar a turma {turma}, nao possui alunos.")
-        else:
-            tela_professores.label_erro.setText(f"")
-            if notas == []:
-                for x in alunos:
-                    tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
-                    tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
-                    tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{x[3]}"))
-                    quant_row += 1
-                quant_row = 0
-                for y in notas:
-                    tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f""))
-                    tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f""))
-                    tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f""))
-                    quant_row += 1
-            else:
-                for x in alunos:
-                    tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[0]}"))
-                    tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[1]}"))
-                    tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{x[3]}"))
-                    quant_row += 1
-                quant_row = 0
-                for y in notas:
-                    tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{y[3]}"))
-                    tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{y[4]}"))
-                    tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{y[5]}"))
-                    quant_row += 1
-    elif turma == '' or nome == '':
-        tela_professores.label_erro.setText("Campo turma obrigatorio.")
-    else:
+    if turma == 'Todas' and nome == '':
+        tela_professores.label_erro.setText("ERRO! Nenhum nome informado.")
+    elif turma != 'Todas' and nome == '':
         tela_professores.label_erro.setText("")
-        info_aluno = banco.buscar_aluno_por_nome_e_turma(nome, turma)
-        if info_aluno is None:
+        search_notas = verificar_materia_com_nota(prof[4])
+        if search_notas is None:
+            tela_professores.label_erro.setText("ERRO! Nenhum aluno encontrado.")
+        else:
+            tabela.clearContents()
+            tabela.setRowCount(len(search_notas))
+            for x in search_notas:
+                tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{x[1]}"))
+                tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{x[2]}"))
+                tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{x[3]}"))
+                tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{x[4]}"))
+                tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{x[5]}"))
+                tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{x[6]}"))
+                quant_row += 1
+    elif turma != '' and nome != '':
+        tela_professores.label_erro.setText("")
+        searched = banco.buscar_aluno_por_nome_e_turma(nome, turma)
+        if searched is None:
             tela_professores.label_erro.setText("Nenhum Aluno encontrado.")
         else:
             tela_professores.label_erro.setText("")
-            tabela.setRowCount(0)
-            search_notas = banco.buscar_nota_por_materia(prof[4], info_aluno[7])
-            tabela.setRowCount(len(info_aluno))
+            search_notas = verificar_materia(prof[4], searched[7])
+            tabela.clearContents()
+            tabela.setRowCount(1)
             if search_notas is None:
-                tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{info_aluno[0]}"))
-                tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{info_aluno[1]}"))
+                tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
                 tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f""))
                 tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f""))
                 tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f""))
-                tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{info_aluno[3]}"))
+                tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
             else:
-                tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{info_aluno[0]}"))
-                tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{info_aluno[1]}"))
+                tabela.setItem(quant_row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                tabela.setItem(quant_row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
                 tabela.setItem(quant_row, 2, QtWidgets.QTableWidgetItem(f"{search_notas[1]}"))
                 tabela.setItem(quant_row, 3, QtWidgets.QTableWidgetItem(f"{search_notas[2]}"))
                 tabela.setItem(quant_row, 4, QtWidgets.QTableWidgetItem(f"{search_notas[3]}"))
-                tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{info_aluno[3]}"))
-            
+                tabela.setItem(quant_row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+
+def verificar_materia(materia,user_id):
+    if materia == "Biologia":
+        nota_materia= banco.buscar_nota_por_materia_biologia(user_id)
+    elif materia == "Filosofia":
+        nota_materia = banco.buscar_nota_por_materia_filosofia(user_id)
+    elif materia == "Fisica":
+        nota_materia = banco.buscar_nota_por_materia_fisica(user_id)
+    elif materia == "Geografia":
+        nota_materia = banco.buscar_nota_por_materia_geografia(user_id)
+    elif materia == "Historia":
+        nota_materia = banco.buscar_nota_por_materia_historia(user_id)
+    elif materia == "Matematica":
+        nota_materia = banco.buscar_nota_por_materia_matematica(user_id)
+    elif materia == "Portugues":
+        nota_materia = banco.buscar_nota_por_materia_portugues(user_id)            
+    return nota_materia    
+
+def verificar_materia_notas_alunos_boletim(user_id):
+    biologia= banco.buscar_nota_por_materia_biologia(user_id)
+    filosofia = banco.buscar_nota_por_materia_filosofia(user_id)
+    fisica = banco.buscar_nota_por_materia_fisica(user_id)
+    geografia = banco.buscar_nota_por_materia_geografia(user_id)
+    historia = banco.buscar_nota_por_materia_historia(user_id)
+    matematica = banco.buscar_nota_por_materia_matematica(user_id)
+    portugues = banco.buscar_nota_por_materia_portugues(user_id)            
+    return biologia, filosofia, fisica,  geografia, historia, matematica, portugues  
+
+def verificar_materia_all(materia, turma):
+    if materia == "Biologia":
+        nota_materia= banco.buscar_nota_por_materia_biologia_all(turma)
+    elif materia == "Filosofia":
+        nota_materia = banco.buscar_nota_por_materia_filosofia_all(turma)
+    elif materia == "Fisica":
+        nota_materia = banco.buscar_nota_por_materia_fisica_all(turma)
+    elif materia == "Geografia":
+        nota_materia = banco.buscar_nota_por_materia_geografia_all(turma)
+    elif materia == "Historia":
+        nota_materia = banco.buscar_nota_por_materia_historia_all(turma)
+    elif materia == "Matematica":
+        nota_materia = banco.buscar_nota_por_materia_matematica_all(turma)
+    elif materia == "Portugues":
+        nota_materia = banco.buscar_nota_por_materia_portugues_all(turma)            
+    return nota_materia    
+
 
 def add_nota_para_aluno():
     user = tela_login.inputnome.text()
@@ -311,57 +406,236 @@ def add_nota_para_aluno():
             tela_professores.label_erro.setText("Nenhum Aluno encontrado.")
         else:
             tabela.setRowCount(1)
+            nota_materia = verificar_materia(prof[4], searched[7]) 
             if def_nota == "Nota 1":
-                nota_materia = banco.buscar_nota_por_materia(prof[4], searched[7])
-                if nota_materia is None:
-                    banco.inserir_notas_aluno(str(nota),'','',prof[4], searched[1], searched[6], searched[7])
-                    nota_materia = banco.buscar_nota_por_materia(prof[4], searched[7])
-                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
-                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
-                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
-                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
-                    tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
-                    tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
-                else:
-                    tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
-                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
-                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
-                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
-                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
-                    tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
-                    tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                if prof[4] == "Matematica":
+                    if nota_materia is None:
+                        banco.editar_notas_aluno_matematica(str(nota),'','', searched[1], searched[7])
+                        nota_materia = verificar_materia(prof[4], searched[7])
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    else:
+                        tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))        
+                elif prof[4] == "Portugues":
+                    if nota_materia is None:
+                        banco.editar_notas_aluno_portugues(str(nota),'','', searched[1], searched[7])
+                        nota_materia = verificar_materia(prof[4], searched[7])
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    else:
+                        tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))        
+                elif prof[4] == "Geografia":
+                    if nota_materia is None:
+                        banco.editar_notas_aluno_geografia(str(nota),'','', searched[1], searched[7])
+                        nota_materia = verificar_materia(prof[4], searched[7])
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    else:
+                        tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))        
+                elif prof[4] == "Filosofia":
+                    if nota_materia is None:
+                        banco.editar_notas_aluno_filosofia(str(nota),'','', searched[1], searched[7])
+                        nota_materia = verificar_materia(prof[4], searched[7])
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    else:
+                        tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))        
+                elif prof[4] == "Historia":
+                    if nota_materia is None:
+                        banco.editar_notas_aluno_historia(str(nota),'','', searched[1], searched[7])
+                        nota_materia = verificar_materia(prof[4], searched[7])
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    else:
+                        tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))        
+                elif prof[4] == "Biologia":
+                    if nota_materia is None:
+                        banco.editar_notas_aluno_biologia(str(nota),'','', searched[1], searched[7])
+                        nota_materia = verificar_materia(prof[4], searched[7])
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    else:
+                        tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))        
+                elif prof[4] == "Fisica":
+                    if nota_materia is None:
+                        banco.editar_notas_aluno_fisica(str(nota),'','', searched[1], searched[7])
+                        nota_materia = verificar_materia(prof[4], searched[7])
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    else:
+                        tela_professores.label_erro.setText("Aluno ja possui nota no primeiro trimestre.")
+                        tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                        tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                        tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                        tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                        tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                        tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))        
             elif def_nota == "Nota 2":
                 tela_professores.label_erro.clear()
-                nota_materia = banco.buscar_nota_por_materia(prof[4], searched[7])
+                if prof[4] == "Biologia":
+                    nota_materia= banco.buscar_nota_por_materia_biologia(searched[7])
+                elif prof[4] == "Filosofia":
+                    nota_materia = banco.buscar_nota_por_materia_filosofia(searched[7])
+                elif prof[4] == "Fisica":
+                    nota_materia = banco.buscar_nota_por_materia_fisica(searched[7])
+                elif prof[4] == "Geografia":
+                    nota_materia = banco.buscar_nota_por_materia_geografia(searched[7])
+                elif prof[4] == "Historia":
+                    nota_materia = banco.buscar_nota_por_materia_historia(searched[7])
+                elif prof[4] == "Matematica":
+                    nota_materia = banco.buscar_nota_por_materia_matematica(searched[7])
+                elif prof[4] == "Portugues":
+                    nota_materia = banco.buscar_nota_por_materia_portugues(searched[7])
                 if nota_materia is None:
-                    tela_professores.label_erro.setText("Nota nao adicionada, aluno nao possui nota no primeiro trimestre.")                
+                    tela_professores.label_erro.setText("ERRO! Aluno nao possui nota no primeiro trimestre.")                
                 elif nota_materia[2] != "":
-                    tela_professores.label_erro.setText("Nota nao adicionada, aluno ja possui nota no segundo trimestre.")                
-                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
-                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
-                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
-                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
-                    tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
-                    tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
-                elif nota_materia[3] != '':
-                    tela_professores.label_erro.setText("Nota nao adicionada, aluno ja possui nota no terceiro trimestre.")
-                else:                
-                    banco.editar_notas_aluno(nota_materia[1], str(nota), "", prof[4], searched[1], searched[6], searched[7])
-                    nota_materia = banco.buscar_nota_por_materia(prof[4], searched[7])
-                    tela_professores.label_erro.setText("")                
-                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
-                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
-                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
-                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
-                    tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
-                    tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    tela_professores.label_erro.setText("ERRO! aluno ja possui nota no segundo trimestre.")                
+                else:
+                    if prof[4] == "Matematica":
+                        if nota_materia[2] == '':
+                            banco.editar_notas_aluno_matematica(nota_materia[1],str(nota),'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Portugues":
+                        if nota_materia[2] == '':
+                            banco.editar_notas_aluno_portugues(nota_materia[1],str(nota),'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Geografia":
+                        if nota_materia[2] == '':
+                            banco.editar_notas_aluno_geografia(nota_materia[1],str(nota),'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Filosofia":
+                        if nota_materia[2] == '':
+                            banco.editar_notas_aluno_filosofia(nota_materia[1],str(nota),'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Historia":
+                        if nota_materia[2] == '':
+                            banco.editar_notas_aluno_historia(nota_materia[1],str(nota),'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Biologia":
+                        if nota_materia[2] == '':
+                            banco.editar_notas_aluno_biologia(nota_materia[1],str(nota),'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Fisica":
+                        if nota_materia[2] == '':
+                            banco.editar_notas_aluno_matematica(nota_materia[1],str(nota),'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
             elif def_nota == "Nota 3":
                 tela_professores.label_erro.clear()
-                nota_materia = banco.buscar_nota_por_materia(prof[4], searched[7])
+                nota_materia = verificar_materia(prof[4], searched[7])
                 if nota_materia is None:
                     tela_professores.label_erro.setText("Nota nao adicionada, aluno nao possui nota no primeiro trimestre.")
+                elif nota_materia[1] == '':
+                    tela_professores.label_erro.setText("Nota nao adicionada, aluno nao possui nota no primeiro trimestre.")
+                elif nota_materia[2] == '':
+                    tela_professores.label_erro.setText("Nota nao adicionada, aluno nao possui nota no segundo trimestre.")
                 elif nota_materia[3] != "":
-                    tela_professores.label_erro.setText("Nota nao adicionada, aluno ja possui nota no segundo trimestre.")                
+                    tela_professores.label_erro.setText("Nota nao adicionada, aluno ja possui nota no terceiro trimestre.")                
                     tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
                     tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
                     tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
@@ -369,16 +643,69 @@ def add_nota_para_aluno():
                     tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
                     tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
                 else:
-                    banco.editar_notas_aluno(nota_materia[1], nota_materia[2], str(nota), prof[4], searched[1], searched[6], searched[7])
-                    nota_materia = banco.buscar_nota_por_materia(prof[4], searched[7])
-                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
-                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
-                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
-                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
-                    tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
-                    tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
-                    
-
+                    if prof[4] == "Matematica":
+                            banco.editar_notas_aluno_matematica(nota_materia[1],nota_materia[2],'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Portugues":
+                            banco.editar_notas_aluno_portugues(nota_materia[1],nota_materia[2],'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Geografia":
+                            banco.editar_notas_aluno_geografia(nota_materia[1],nota_materia[2],'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Filosofia":
+                            banco.editar_notas_aluno_filosofia(nota_materia[1],nota_materia[2],'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Historia":
+                            banco.editar_notas_aluno_historia(nota_materia[1],nota_materia[2],'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Biologia":
+                            banco.editar_notas_aluno_biologia(nota_materia[1],nota_materia[2],'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
+                    elif prof[4] == "Fisica":
+                            banco.editar_notas_aluno_fisica(nota_materia[1],nota_materia[2],'', searched[1], searched[7])
+                            nota_materia = verificar_materia(prof[4], searched[7])
+                            tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                            tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                            tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                            tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                            tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
 def editar_nota():
     user = tela_login.inputnome.text()
     aluno = tela_professores.inputbuscaraluno.text()
@@ -398,18 +725,45 @@ def editar_nota():
         if searched is None:
             tela_professores.label_erro.setText("Nenhum Aluno encontrado.")
         else:
-            nota_materia = banco.buscar_nota_por_materia(prof[4], searched[7])
-            tabela.setRowCount(len(searched))
+            nota_materia = verificar_materia(prof[4], searched[7])
+            tabela.setRowCount(1)
             if nota_materia is None:
                 tela_professores.label_erro.setText("Nenhuma nota encontrada.")
             elif def_nota == "Nota 1":
                 tela_professores.label_erro.setText("")
-                b = banco.buscar_nota_por_materia(prof[4], searched[7])
+                b = verificar_materia(prof[4], searched[7])
                 if b[1] == '':
                     tela_professores.label_erro.setText("Aluno nao possui nota para mudanca.")
                 else:
-                    banco.editar_notas_aluno(nota, b[2], b[3], prof[4], searched[1], searched[6], searched[7])
-                    b = banco.buscar_nota_por_materia(prof[4], searched[7])
+                    if prof[4] == "Matematica":
+                        banco.editar_notas_aluno_matematica(nota, b[2], b[3], searched[1], searched[7])
+                        b = verificar_materia(prof[4], searched[7])
+                        tela_professores.label_erro.setText("Nota Alterada.")
+                    elif prof[4] == "Portugues":
+                        banco.editar_notas_aluno_portugues(nota, b[2], b[3], searched[1], searched[7])
+                        b = verificar_materia(prof[4], searched[7])
+                        tela_professores.label_erro.setText("Nota Alterada.")
+                    elif prof[4] == "Fisica":
+                        banco.editar_notas_aluno_fisica(nota, b[2], b[3], searched[1], searched[7])
+                        b = verificar_materia(prof[4], searched[7])
+                        tela_professores.label_erro.setText("Nota Alterada.")
+                    elif prof[4] == "Geografia":
+                        banco.editar_notas_aluno_geografia(nota, b[2], b[3], searched[1], searched[7])
+                        b = verificar_materia(prof[4], searched[7])
+                        tela_professores.label_erro.setText("Nota Alterada.")
+                    elif prof[4] == "Historia":
+                        banco.editar_notas_aluno_historia(nota, b[2], b[3], searched[1], searched[7])
+                        b = verificar_materia(prof[4], searched[7])
+                        tela_professores.label_erro.setText("Nota Alterada.")
+                    elif prof[4] == "Filosofia":
+                        banco.editar_notas_aluno_filosofia(nota, b[2], b[3], searched[1],searched[7])
+                        b = verificar_materia(prof[4], searched[7])
+                        tela_professores.label_erro.setText("Nota Alterada.")
+                    elif prof[4] == "Biologia":
+                        banco.editar_notas_aluno_biologia(nota, b[2], b[3], searched[1], searched[7])
+                        b = verificar_materia(prof[4], searched[7])
+                        tela_professores.label_erro.setText("Nota Alterada.")
+                    nota_materia = verificar_materia(prof[4], searched[7])
                     tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
                     tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
                     tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
@@ -418,33 +772,77 @@ def editar_nota():
                     tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
             elif def_nota == "Nota 2":
                 tela_professores.label_erro.setText("")
-                b = banco.buscar_nota_por_materia(prof[4], searched[7])
-                if b[2] == '':
-                    tela_professores.label_erro.setText("Aluno nao possui nota para mudanca.")
-                else:
-                    banco.editar_notas_aluno(b[1], nota, b[3], prof[4], searched[1], searched[6], searched[7])
-                    b = banco.buscar_nota_por_materia(prof[4], searched[7])
-                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
-                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
-                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
-                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
-                    tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
-                    tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))  
+                if prof[4] == "Matematica":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_matematica(b[1], nota, b[3], searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                if prof[4] == "Portugues":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_matematica(b[1], nota, b[3], searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                if prof[4] == "Fisica":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_matematica(b[1], nota, b[3], searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                if prof[4] == "Geografia":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_matematica(b[1], nota, b[3], searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                if prof[4] == "Historia":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_matematica(b[1], nota, b[3], searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                if prof[4] == "Filosofia":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_matematica(b[1], nota, b[3], searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                if prof[4] == "Biologia":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_matematica(b[1], nota, b[3], searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                nota_materia = verificar_materia(prof[4], searched[7])
+                tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
             elif def_nota == "Nota 3":
-                tela_professores.label_erro.setText("")
-                b = banco.buscar_nota_por_materia(prof[4], searched[7])
-                if b[3] == '':
-                    tela_professores.label_erro.setText("Aluno nao possui nota para mudanca.")
-                else:
-                    banco.editar_notas_aluno(b[1], b[2], nota, prof[4], searched[1], searched[6], searched[7])
-                    b = banco.buscar_nota_por_materia(prof[4], searched[7])
-                    tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
-                    tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
-                    tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
-                    tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
-                    tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
-                    tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
-  
+                if prof[4] == "Matematica":
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_biologia(b[1], b[2], nota, searched[1], searched[7])
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                if prof[4] == "Portugues":
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_biologia(b[1], b[2], nota, searched[1], searched[7])
+                if prof[4] == "Fisica":
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_biologia(b[1], b[2], nota, searched[1], searched[7])
+                if prof[4] == "Geografia":
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_biologia(b[1], b[2], nota, searched[1], searched[7])
+                if prof[4] == "Historia":
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_biologia(b[1], b[2], nota, searched[1], searched[7])
+                if prof[4] == "Filosofia":
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_biologia(b[1], b[2], nota, searched[1], searched[7])
+                if prof[4] == "Biologia":
+                    tela_professores.label_erro.setText("Nota Alterada.")
+                    b = verificar_materia(prof[4], searched[7])
+                    banco.editar_notas_aluno_biologia(b[1], b[2], nota, searched[1], searched[7])
+                nota_materia = verificar_materia(prof[4], searched[7])
+                tabela.setItem(row, 0, QtWidgets.QTableWidgetItem(f"{searched[0]}"))
+                tabela.setItem(row, 1, QtWidgets.QTableWidgetItem(f"{searched[1]}"))
+                tabela.setItem(row, 2, QtWidgets.QTableWidgetItem(f"{nota_materia[1]}"))
+                tabela.setItem(row, 3, QtWidgets.QTableWidgetItem(f"{nota_materia[2]}"))
+                tabela.setItem(row, 4, QtWidgets.QTableWidgetItem(f"{nota_materia[3]}"))
+                tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{searched[3]}"))
 
 def remover():
     cpf = tela_registro.inputcpfdeletar.text()
@@ -490,18 +888,23 @@ def voltar_tela_minhas_turmas_prof():
 def adicionar_falta_para_aluno():
     aluno = tela_professores.inputbuscaraluno.text()
     turma = tela_professores.comboturmas.currentText()
+    row = 0
     if aluno == '' or turma == '':
         tela_professores.label_erro.setText("Campo(s) invalido(s).")
     else:
         tela_professores.label_erro.setText("")
         ven_alun = banco.buscar_aluno_por_nome_e_turma(aluno,turma)
+        tabela = tela_professores.tablealunosprof
         if ven_alun is None:
             tela_professores.label_erro.setText("Nenhum aluno encontrado.")
         else:
+            tabela.setItem(row, 5, QtWidgets.QTableWidgetItem(f"{ven_alun[3]}"))
             falta = int(ven_alun[3]) + 1
             banco.editar_falta_aluno(falta, ven_alun[7])
             tela_professores.label_erro.setText("Falta Inserida.")
 
+def fechar_tela_aviso():
+    tela_aviso.close()
 
 def voltar_tela_prof():
     tela_professores.close()
@@ -514,6 +917,7 @@ if __name__ == "__main__":
     tela_registro = uic.loadUi('cadastro-aluno-professores.ui')
     tela_alunos = uic.loadUi('menu-aluno.ui')
     tela_minha_turma = uic.loadUi('minha-turma.ui')
+    tela_aviso = uic.loadUi('aviso.ui')
     tela_professores = uic.loadUi('menu-professor.ui')
     tela_dados_escolares_matutino = uic.loadUi('101 Matutino.ui')
     tela_dados_escolares_vespertino = uic.loadUi('102 Vespertino.ui')
@@ -531,6 +935,8 @@ if __name__ == "__main__":
     tela_registro.btnvoltarcadastro_3.clicked.connect(voltar_tela_diretor)
     tela_registro.btnvoltarcadastro.clicked.connect(voltar_tela_diretor)
     tela_registro.btnremover.clicked.connect(remover)
+
+    tela_aviso.btnok.clicked.connect(fechar_tela_aviso)
 
     tela_professores.btnbuscaraluno.clicked.connect(buscar_aluno_tela_professor)
     tela_professores.editarnota.clicked.connect(editar_nota)
